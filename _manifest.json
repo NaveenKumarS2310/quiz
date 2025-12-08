@@ -1,0 +1,12 @@
+{
+  "name": "eMobile",
+  "short_name": "eMobile",
+  "start_url": "http://localhost:8000/",
+  "display": "standalone",
+  "scope" : "login/",
+    "categories": ["multipurpose ", "ecommerce", "shopping", "blog", "delivery", "store", "wallet", "banking", "education", "distance learning", "jobs", "careers"],
+    "background_color": "#ffffff",
+    "theme_color": "#ff3f3f",
+    "orientation": "portrait",
+    "description": "eMobile - Multipurpose HTML5 Template"
+  }
