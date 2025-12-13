@@ -3,6 +3,9 @@
 @section('keywords', 'Home Page')
 
 @extends('layouts.master')
+@section('css')
+
+@endsection
 @section('content')
     <section class="emPage__public padding-t-70">
 
@@ -11,21 +14,21 @@
         <div class="em_swiper_products emCoureses__grid margin-b-20">
             <div class="em_bodyCarousel padding-l-20 padding-r-20">
                 <div class="em_itemCourse_grid w-100">
-                    <a href="https://t.me/quizunivers" class="card">
+                    <div class="card">
                         <div class="card-body" style="text-align: center;">
                             <h5 class="size-17">
                                 For Daily Updates Join our Telegram Group
                             </h5>
                             <center>
-                                <button type="button" class="btn btn_default margin-t-20">
+                                <a  href="https://t.me/quizunivers"><button type="button" class="btn btn_default margin-t-20">
                                     <div class="icon">
                                         <i class="tio-link" style="color: #fff;"></i>
                                     </div>
                                     <span>Join our Telegram Group</span>
-                                </button>
+                                </button></a>
                             </center>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,9 +50,9 @@
         
         <!-- End. em_swiper_products -->
         <!-- Start title -->
-        <div class="emTitle_co padding-5 padding-l-20">
+        {{-- <div class="emTitle_co padding-5 padding-l-20">
             <h2 class="size-16 weight-500 color-primary mb-1">Latest Quiz</h2>
-        </div>
+        </div> --}}
         <!-- End. title -->
        
 

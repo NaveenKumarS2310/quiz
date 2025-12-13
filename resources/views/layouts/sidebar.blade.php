@@ -29,7 +29,13 @@
                     <div class="em_profile_user">
                         <div class="media">
                             <a href="profile">
-                                <img class="_imgUser" src="{{ url('/') }}/user-icon.png" alt="">
+                                {{-- <img class="_imgUser" src="{{ url('/') }}/user-icon.png" alt=""> --}}
+                                 {{-- <img class="avatar avatar-xxl avatar-4x3"
+                                    src="{{ asset('assets/new_assets/img/integrations-logo/zapier-banner.png') }}"
+                                    alt="Zapier"> --}}
+                                    <?php $av = str_split(auth()->user()->name);
+                                    ?>
+                                <div class="user-avatar me-3">{{$av[0]}}</div>
                                 <p style="color: red;">{{ auth()->user()->role }}</p>
                             </a>
                             <div class="media-body">
@@ -66,7 +72,24 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    @if (auth()->check() && (auth()->user()->role == 'Admin'))
+                     <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/users-list') }}">
+                            <div class="">
+                                <div class="icon_current">
+                                   <i class="bi bi-person-lines-fill"></i>
+                                    <span class="title_link">List of users</span>
+                                </div>
+                                <div class="icon_active">
+                                   <i class="bi bi-person-lines-fill"></i>
+                                    <span class="title_link">List of users</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    @endif
+
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ url('quiz') }}">
                             <div class="">
                                 <div class="icon_current">
@@ -79,9 +102,10 @@
                                 </div>
                             </div>
                         </a>
-                    </li>
+                    </li> --}}
                     
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="{{ url('privacy-policy') }}">
                             <div class="">
                                 <div class="icon_current">
@@ -100,11 +124,11 @@
                         <a class="nav-link" href="{{ url('contact-us') }}">
                             <div class="">
                                 <div class="icon_current">
-                                    <i class="tio-book_outlined"></i>
+                                   <i class="bi bi-telephone-outbound"></i>
                                     <span class="title_link">Contact Us</span>
                                 </div>
                                 <div class="icon_active">
-                                    <i class="tio-book_outlined"></i>
+                                   <i class="bi bi-telephone-outbound"></i>
                                     <span class="title_link">Contact Us</span>
                                 </div>
                             </div>

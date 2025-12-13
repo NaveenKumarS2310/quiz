@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\QustionController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,5 +53,8 @@ Route::post('/question-edit-submit', [QustionController::class, 'question_edit_s
 Route::get('/delete-question/{quiz_id}', [QustionController::class, 'delete_question']);
 
 Route::get('/profile', [QuizController::class, 'profile'])->name('profile.update');
+
+Route::get('/users-list', [RoleController::class, 'index'])->name('role.index');
+Route::post('/role-change', [RoleController::class, 'role_changer'])->name('role.change');
 
 
