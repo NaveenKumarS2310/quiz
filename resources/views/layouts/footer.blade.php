@@ -23,6 +23,7 @@
                 <div class="txt__tile">TNPSC</div>
             </a>
         </div>
+        @if (auth()->check() && (auth()->user()->role == 'Admin' || auth()->user()->role == 'Editor'))
         <div class="item_link">
             <a href="#" class="btn btn_navLink">
                 <button type="button" class="btn btnCircle_default _lg" data-toggle="modal"
@@ -31,6 +32,7 @@
                 </button>
             </a>
         </div>
+        @endif
 
         <div class="item_link">
             <a href="#" class="btn btn_navLink">

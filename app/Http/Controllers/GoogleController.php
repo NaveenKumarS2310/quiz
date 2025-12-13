@@ -33,6 +33,7 @@ class GoogleController extends Controller
 
             $finduser = User::where('email', $user->email)->first();
 
+           
             if($finduser){
 
                 Auth::login($finduser, true);
@@ -44,7 +45,6 @@ class GoogleController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'google_id'=> $user->id,
-                    'password' => encrypt('123456dummy')
                 ]);
 
                 Auth::login($newUser, true);

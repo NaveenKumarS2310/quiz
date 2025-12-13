@@ -47,7 +47,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, true)) {
             return redirect()->route('home');
         }
-        return back()->with('error', 'Oppes! You have entered invalid credentials');
+        return back()->with('error', 'Opps! You have entered invalid credentials');
     }
 
     public function sign_out()

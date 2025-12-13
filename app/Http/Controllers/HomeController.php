@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\QuizList;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function home()
     {
+        
         $latest_quiz = QuizList::latest()->limit(30)->get();
         return view('home', compact('latest_quiz'));
     }
