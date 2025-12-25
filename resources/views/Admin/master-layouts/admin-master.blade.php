@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,23 +7,23 @@
     <title>@yield('title')</title>
     @yield('css')
     <!-- plugins:css -->
-    <link rel="stylesheet" href="{{ url('/') }}/theme/admin-assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="{{ url('/') }}/theme/admin-assets/vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="{{ url('/') }}/theme/admin-assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="{{ url('/') }}/theme/admin-assets/vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('theme/admin-assets/vendors/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme/admin-assets/vendors/ti-icons/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme/admin-assets/vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme/admin-assets/vendors/font-awesome/css/font-awesome.min.css') }}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="{{ url('/') }}/theme/admin-assets/vendors/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="{{ url('/') }}/theme/admin-assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="{{ asset('theme/admin-assets/vendors/font-awesome/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('theme/admin-assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="{{ url('/') }}/theme/admin-assets/css/style.css">
+    <link rel="stylesheet" href="{{ asset('theme/admin-assets/css/style.css') }}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ url('/') }}/theme/admin-assets/images/favicon.png" />
+    <link rel="shortcut icon" href="{{ asset('theme/admin-assets/images/favicon.png') }}" />
 </head>
-
 <body>
     <div class="container-scroller">
         {{-- <div class="row p-0 m-0 proBanner" id="proBanner">
@@ -58,15 +57,14 @@
             <!-- main-panel ends -->
         </div>
     </div>
-    <script src="{{ url('/') }}/theme/admin-assets/vendors/js/vendor.bundle.base.js"></script>
-    <script src="{{ url('/') }}/theme/admin-assets/vendors/chart.js/chart.umd.js"></script>
-    <script src="{{ url('/') }}/theme/admin-assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-    <script src="{{ url('/') }}/theme/admin-assets/js/off-canvas.js"></script>
-    <script src="{{ url('/') }}/theme/admin-assets/js/misc.js"></script>
-    <script src="{{ url('/') }}/theme/admin-assets/js/settings.js"></script>
-    <script src="{{ url('/') }}/theme/admin-assets/js/todolist.js"></script>
-    <script src="{{ url('/') }}/theme/admin-assets/js/jquery.cookie.js"></script>
-    <script src="{{ url('/') }}/theme/admin-assets/js/dashboard.js"></script>
+    <script src="{{ asset('theme/admin-assets/vendors/js/vendor.bundle.base.js') }}"></script>
+    <script src="{{ asset('theme/admin-assets/vendors/chart.js/chart.umd.js') }}"></script>
+    <script src="{{ asset('theme/admin-assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('theme/admin-assets/js/off-canvas.js') }}"></script>
+    <script src="{{ asset('theme/admin-assets/js/misc.js') }}"></script>
+    <script src="{{ asset('theme/admin-assets/js/settings.js') }}"></script>
+    <script src="{{ asset('theme/admin-assets/js/todolist.js') }}"></script>
+    <script src="{{ asset('theme/admin-assets/js/jquery.cookie.js') }}"></script>
+    <script src="{{ asset('theme/admin-assets/js/dashboard.js') }}"></script>
 </body>
-
 </html>
