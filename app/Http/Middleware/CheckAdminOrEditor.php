@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Http\Middleware;
+
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 class CheckAdminOrEditor
 {
     /**
@@ -13,7 +16,8 @@ class CheckAdminOrEditor
     public function handle(Request $request, Closure $next): Response
     {
         $user = auth()->user();
-        $tag = ['Admin','Editor'];
+        $tag = ['Admin', 'Editor'];
+        $routeName = $request->route()->getName();
         if (!in_array($user->role, $tag)) {
             if ($request->ajax()) {
                 return response()->json([
@@ -22,7 +26,9 @@ class CheckAdminOrEditor
             }
             return redirect()->route('login')->with('error', 'Access forbidden.');
         }
+
         
+
         return $next($request);
     }
 }
