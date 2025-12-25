@@ -16,6 +16,9 @@ class AuthCheck
     public function handle(Request $request, Closure $next): Response
     {
 
+        $routeName = $request->route()->getName();
+
+
         if (!auth()->check()) {
 
             if($request->ajax()){
@@ -25,6 +28,14 @@ class AuthCheck
             }
             
             return redirect()->route('login')->with('message', 'Your session expired');
+        }
+
+        if (auth()->check()) {
+            // dd('sad',$routeName);
+
+            if($routeName =="admin.login"){
+                return redirect()->route('admin.dashboard');
+            }
         }
         return $next($request);
     }
