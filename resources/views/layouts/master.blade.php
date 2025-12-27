@@ -20,7 +20,8 @@
     <meta name="keywords"
         content="tnpsc,tnpsc group,tnpsc group 4,tnpsc group 2,tnpsc group 1,tnpsc departmental exam,tnpsc exam,group 4 exam,tnpsc academy,vao exam,tnpsc group 4 hall ticket,tnpsc group 4 exam,tnpsc group 4 syllabus,tnpsc group 2 syllabus,tnpsc books,tnpsc portal,tnpsc group 1 syllabus,tnpsc hall ticket,tnpsc notification,tnpsc group 2 notification,tnpsc syllabus,tnpsc portal current affairs,tnpsc result,tnpsc group 4 study materials,tnpsc group 4 previous year question papers,tnpsc group 2 previous year question papers,tnpsc login,tnpsc group 4 apply online,tnpsc official website,tnpsc answer key, tnpsc previous year question papers,tnpscacademy,group 2 previous year question papers,tnpsc group 4 books,group 4 question papers,tnpsc group 4 app,group 4 previous year question papers,tnpsc question papers,tnpsc thervupettagam,tnpsc website,tnpsc group 4 question papers,tnpsc group 4 general tamil,tnpsc hall ticket download,tnpsc group 2 syllabus,group 4 syllabus,tnpsc group 4syllabus">
 
-    @yield('css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
     <!-- favicon -->
     <link rel="icon" type="image/png" href="{{ url('/') }}/favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" href="{{ url('/') }}/favicon.png">
@@ -45,6 +46,7 @@
     <link rel="stylesheet" href="{{ url('/') }}/theme/assets/css/normalize.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    @yield('css')
 
 
     <script type="text/javascript"
@@ -244,6 +246,8 @@
  
     <!-- PWA app service registration and works js -->
     <script src="{{ url('/') }}/theme/assets/js/pwa-services.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @yield('script')
 </body>
