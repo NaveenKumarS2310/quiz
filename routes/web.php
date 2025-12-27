@@ -54,7 +54,6 @@ Route::get('/delete-question/{quiz_id}', [QustionController::class, 'delete_ques
 
 Route::get('/profile', [QuizController::class, 'profile'])->name('profile.update');
 
-Route::get('/users-list', [RoleController::class, 'index'])->name('role.index');
-Route::post('/role-change', [RoleController::class, 'role_changer'])->name('role.change');
+
 
 

@@ -19,6 +19,7 @@ class AuthCheck
         $routeName = $request->route()->getName();
 
 
+
         if (!auth()->check()) {
 
             if($request->ajax()){

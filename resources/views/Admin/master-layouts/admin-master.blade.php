@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="{{ asset('theme/admin-assets/vendors/ti-icons/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/admin-assets/vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/admin-assets/vendors/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('theme/admin-assets/vendors/font-awesome/css/font-awesome.min.css') }}" />
@@ -66,5 +69,8 @@
     <script src="{{ asset('theme/admin-assets/js/todolist.js') }}"></script>
     <script src="{{ asset('theme/admin-assets/js/jquery.cookie.js') }}"></script>
     <script src="{{ asset('theme/admin-assets/js/dashboard.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @yield('js')
 </body>
 </html>
