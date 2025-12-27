@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -12,7 +13,7 @@ class RoleController extends Controller
 
         $users = User::where('role', '!=', 'Admin')->get();
 
-       return view('role_management.index', compact('users'));
+       return view('Admin.role_management.index', compact('users'));
     }
 
     public function role_changer(Request $request){

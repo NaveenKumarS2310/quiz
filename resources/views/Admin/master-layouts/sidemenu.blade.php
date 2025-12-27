@@ -15,11 +15,20 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{ route('admin.dashboard') }}">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('role.index') }}">
+                <span class="menu-title">List of Users</span>
+                {{-- <i class="mdi mdi-file-document-box menu-icon"></i> --}}
+                <i class="bi bi-person-lines-fill menu-icon"></i>
+            </a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                 aria-controls="ui-basic">
