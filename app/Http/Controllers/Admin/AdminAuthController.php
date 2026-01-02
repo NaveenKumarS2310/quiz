@@ -1,20 +1,21 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-
 class AdminAuthController extends Controller
 {
     //
-
     public function login()
     {
 
+        if (auth()->check()) {
+            // dd('sad',$routeName);
 
+            
+                return redirect()->route('admin.dashboard');
+           
+        }
         return view('Admin.Auth.login');
     }
     public function loginSubmit(Request $request)
@@ -24,5 +25,11 @@ class AdminAuthController extends Controller
             return redirect()->route('admin.dashboard');
         }
         return back()->with('error', 'Opps! You have entered invalid credentials');
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('admin.login');
+       
     }
 }

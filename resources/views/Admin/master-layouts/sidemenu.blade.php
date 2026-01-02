@@ -14,56 +14,81 @@
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
             </a>
         </li>
+       
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.dashboard') }}">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
         </li>
+        
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('role.index') }}">
-                <span class="menu-title">List of Users</span>
-                {{-- <i class="mdi mdi-file-document-box menu-icon"></i> --}}
-                <i class="bi bi-person-lines-fill menu-icon"></i>
-            </a>
-        </li>
+        
 
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                 aria-controls="ui-basic">
-                <span class="menu-title">Basic UI Elements</span>
+                <span class="menu-title">Masters</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-crosshairs-gps menu-icon"></i>
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
+                        <a class="nav-link" href="{{ route('admin.quiz.category.create.index') }}">Quiz Category</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a>
+                        
+                        <a class="nav-link" href="{{ route('admin.interview.category.create.index') }}">Interview Category</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
+                        <a class="nav-link" href="{{ route('admin.job.category.create.index') }}">Job Category</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.news.category.create.index') }}">News Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.notes.category.create.index') }}">Notes Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.document.category.create.index') }}">Document Category</a>
+                    </li>
+
                 </ul>
             </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-                <span class="menu-title">Icons</span>
+                <span class="menu-title">Upload</span>
                 <i class="mdi mdi-contacts menu-icon"></i>
             </a>
             <div class="collapse" id="icons">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/font-awesome.html">Font Awesome</a>
+                        <a class="nav-link" href="pages/icons/font-awesome.html">Free Quiz Test</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/icons/font-awesome.html">Free interview Test</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/icons/font-awesome.html">Payment Test</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/icons/font-awesome.html">Job</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/icons/font-awesome.html">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/icons/font-awesome.html">Document</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/icons/font-awesome.html">Notes</a>
                     </li>
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#forms" aria-expanded="false" aria-controls="forms">
                 <span class="menu-title">Forms</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
@@ -75,21 +100,32 @@
                     </li>
                 </ul>
             </div>
+        </li> --}}
+
+        <li class="nav-item">
+            <a class="nav-link" href="docs/documentation.html" target="_blank">
+                <span class="menu-title">Token Management</span>
+                <i class="mdi mdi-file-document-box menu-icon"></i>
+            </a>
         </li>
+        
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-                <span class="menu-title">Charts</span>
+                <span class="menu-title">User Management</span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
             <div class="collapse" id="charts">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a>
+                        <a class="nav-link" href="pages/charts/chartjs.html">Create user</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('role.index') }}">Role assign</a>
                     </li>
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
                 <span class="menu-title">Tables</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
@@ -101,9 +137,10 @@
                     </li>
                 </ul>
             </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+        </li> --}}
+        {{-- <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false"
+                aria-controls="auth">
                 <span class="menu-title">User Pages</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-lock menu-icon"></i>
@@ -127,12 +164,12 @@
                     </li>
                 </ul>
             </div>
-        </li>
-        <li class="nav-item">
+        </li> --}}
+        {{-- <li class="nav-item">
             <a class="nav-link" href="docs/documentation.html" target="_blank">
                 <span class="menu-title">Documentation</span>
                 <i class="mdi mdi-file-document-box menu-icon"></i>
             </a>
-        </li>
+        </li> --}}
     </ul>
 </nav>

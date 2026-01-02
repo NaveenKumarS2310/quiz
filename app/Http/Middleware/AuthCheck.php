@@ -27,17 +27,19 @@ class AuthCheck
                 'Your session expired'
                ],401); 
             }
-            
+            // dd(str_contains($routeName,'admin'));
+
+            if(str_contains($routeName,'admin')){
+                // dd('asd');
+                return redirect()->route('admin.login')->with('message', 'Your session expired');
+            }else{
+  
             return redirect()->route('login')->with('message', 'Your session expired');
-        }
-
-        if (auth()->check()) {
-            // dd('sad',$routeName);
-
-            if($routeName =="admin.login"){
-                return redirect()->route('admin.dashboard');
             }
+          
         }
+
+        
         return $next($request);
     }
 }

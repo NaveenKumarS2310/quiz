@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class QuizCategory extends Model
+class QuizCategoryMaster extends Model
 {
     use HasFactory;
 
-    protected $table ="quiz_categories";
+    protected $table ="quiz_category_master";
 }

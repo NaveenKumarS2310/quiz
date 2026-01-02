@@ -15,6 +15,12 @@ class CheckAdminOrEditor
      */
     public function handle(Request $request, Closure $next): Response
     {
+
+        $routeName = $request->route()->getName();
+
+
+        
+
         $user = auth()->user();
         $tag = ['Admin', 'Editor'];
         $routeName = $request->route()->getName();
