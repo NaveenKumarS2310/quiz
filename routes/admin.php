@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UploadsController;
+use App\Http\Controllers\Admin\AdminManageController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -73,7 +75,14 @@ Route::middleware('basic.auth')->group(function () {
    Route::post('update/status/job-category', [CategoryController::class, 'Job_status_update'])->name('admin.job.category.status.update');
 
   });
+
   Route::get('/users-list', [RoleController::class, 'index'])->name('role.index');
   Route::post('/role-change', [RoleController::class, 'role_changer'])->name('role.change');
+
+
+  Route::get('/user-create', [AdminManageController::class, 'index'])->name('user.create.index');
+  Route::post('/user-create-by-admin', [AdminManageController::class, 'create_user'])->name('user.create');
+  Route::post('/delete-user', [AdminManageController::class, 'delete_user'])->name('user.delete');
+
  });
 });
