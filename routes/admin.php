@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UploadsController;
+
 use Illuminate\Support\Facades\Route;
 
  Route::get('login', [AdminAuthController::class, 'login'])->name('admin.login');
@@ -53,6 +55,23 @@ Route::middleware('basic.auth')->group(function () {
    Route::post('/store/document-category', [CategoryController::class, 'Document_store'])->name('admin.document.category.create.store');
    Route::post('edit/store/document-category', [CategoryController::class, 'Document_store'])->name('admin.document.category.edit.store');
    Route::post('update/status/document-category', [CategoryController::class, 'Document_status_update'])->name('admin.document.category.status.update');
+  });
+
+  Route::prefix('uploads')->group(function(){
+
+   ////////////////Job
+   Route::get('job-upload-list', [CategoryController::class, 'job_list'])->name('admin.job.upload.list.index');
+
+   Route::get('job-upload-create', [CategoryController::class, 'job_create'])->name('admin.job.upload.create.index');
+
+   Route::get('job-upload-edit', [CategoryController::class, 'job_edit'])->name('admin.job.upload.edit.index');
+
+   Route::post('/store/job-category', [CategoryController::class, 'Job_store'])->name('admin.job.category.create.store');
+   
+   Route::post('edit/store/job-category', [CategoryController::class, 'Job_store'])->name('admin.job.category.edit.store');
+
+   Route::post('update/status/job-category', [CategoryController::class, 'Job_status_update'])->name('admin.job.category.status.update');
+
   });
   Route::get('/users-list', [RoleController::class, 'index'])->name('role.index');
   Route::post('/role-change', [RoleController::class, 'role_changer'])->name('role.change');

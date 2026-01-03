@@ -9,7 +9,7 @@ class AdminAuthController extends Controller
     public function login()
     {
 
-        if (auth()->check()) {
+        if (Auth::check()) {
             // dd('sad',$routeName);
 
             
