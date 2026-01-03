@@ -117,11 +117,11 @@
             <div class="collapse" id="charts">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/charts/chartjs.html">Create user</a>
+                        <a class="nav-link" href="{{ route('user.create.index') }}">Create & edit users</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ route('role.index') }}">Role assign</a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </li>

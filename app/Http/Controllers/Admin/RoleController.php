@@ -19,11 +19,14 @@ class RoleController extends Controller
     public function role_changer(Request $request){
 
         $U_id = base64_decode($request->id);
-        $role = base64_decode($request->type);
+        $role = $request->type;
+
     
-        User::where('id', $U_id)->update(['role' => $role == "User" ? 'Editor' : 'User']);
+        User::where('id', $U_id)->update(['role' => $role]);
 
         return response()->json(['status' => 'success']);
 
     }
+
+   
 }
