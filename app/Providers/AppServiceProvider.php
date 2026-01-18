@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,7 +23,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         $this->loadMigrationsFrom([
-        database_path('migrations/quiz'),
-    ]);
+            database_path('migrations/quiz'),
+        ]);
+
+        Paginator::useBootstrap();
     }
 }

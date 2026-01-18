@@ -74,16 +74,16 @@
                         <a class="nav-link" href="pages/icons/font-awesome.html">Payment Test</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/font-awesome.html">Job</a>
+                        <a class="nav-link" href="{{ route('admin.job.upload.create.index') }}">Job</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/font-awesome.html">News</a>
+                        <a class="nav-link" href="{{ route('admin.news.upload.create.index') }}">News</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/font-awesome.html">Document</a>
+                        <a class="nav-link" href="{{ route('admin.document.upload.create.index') }}">Document</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/font-awesome.html">Notes</a>
+                        <a class="nav-link" href="{{ route('admin.notes.upload.create.index') }}">Notes</a>
                     </li>
                 </ul>
             </div>

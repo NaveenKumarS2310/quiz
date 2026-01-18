@@ -1,6 +1,7 @@
 @extends('Admin.master-layouts.admin-master')
 @section('title', 'Job category')
 @section('css')
+
 @stop
 @section('pageheader')
     @include('Admin.master-layouts.page-header')

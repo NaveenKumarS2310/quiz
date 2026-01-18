@@ -62,17 +62,65 @@ Route::middleware('basic.auth')->group(function () {
   Route::prefix('uploads')->group(function(){
 
    ////////////////Job
-   Route::get('job-upload-list', [CategoryController::class, 'job_list'])->name('admin.job.upload.list.index');
+ 
 
-   Route::get('job-upload-create', [CategoryController::class, 'job_create'])->name('admin.job.upload.create.index');
+   Route::get('job-upload-create', [UploadsController::class, 'job_create'])->name('admin.job.upload.create.index');
 
-   Route::get('job-upload-edit', [CategoryController::class, 'job_edit'])->name('admin.job.upload.edit.index');
+   Route::get('job-upload-edit', [UploadsController::class, 'job_create'])->name('admin.job.upload.edit.index');
 
-   Route::post('/store/job-category', [CategoryController::class, 'Job_store'])->name('admin.job.category.create.store');
+   Route::post('job-upload-create-store', [UploadsController::class, 'job_store'])->name('admin.job.upload.create.store');
    
-   Route::post('edit/store/job-category', [CategoryController::class, 'Job_store'])->name('admin.job.category.edit.store');
+   Route::post('job-upload-edit-store', [UploadsController::class, 'job_store'])->name('admin.job.upload.edit.store');
 
-   Route::post('update/status/job-category', [CategoryController::class, 'Job_status_update'])->name('admin.job.category.status.update');
+   Route::post('job-upload-change-status', [UploadsController::class, 'job_status_update'])->name('admin.job.upload.status.update');
+
+   /////news
+
+   Route::get('news-upload-create', [UploadsController::class, 'news_create'])->name('admin.news.upload.create.index');
+
+   Route::get('news-upload-edit', [UploadsController::class, 'news_create'])->name('admin.news.upload.edit.index');
+
+   Route::post('news-upload-create-store', [UploadsController::class, 'news_store'])->name('admin.news.upload.create.store');
+   
+   Route::post('news-upload-edit-store', [UploadsController::class, 'news_store'])->name('admin.news.upload.edit.store');
+
+   Route::post('news-upload-change-status', [UploadsController::class, 'news_status_update'])->name('admin.news.upload.status.update');
+
+
+   /////notes
+
+   Route::get('notes-upload-create', [UploadsController::class, 'notes_create'])->name('admin.notes.upload.create.index');
+
+   Route::get('notes-upload-edit', [UploadsController::class, 'notes_create'])->name('admin.notes.upload.edit.index');
+
+   Route::post('notes-upload-create-store', [UploadsController::class, 'notes_store'])->name('admin.notes.upload.create.store');
+   
+   Route::post('notes-upload-edit-store', [UploadsController::class, 'notes_store'])->name('admin.notes.upload.edit.store');
+
+   Route::post('notes-upload-change-status', [UploadsController::class, 'notes_status_update'])->name('admin.notes.upload.status.update');
+
+
+   /////document
+
+   Route::get('document-upload-create', [UploadsController::class, 'document_create'])->name('admin.document.upload.create.index');
+
+   Route::get('document-upload-edit', [UploadsController::class, 'document_create'])->name('admin.document.upload.edit.index');
+
+   Route::post('document-upload-create-store', [UploadsController::class, 'document_store'])->name('admin.document.upload.create.store');
+   
+   Route::post('document-upload-edit-store', [UploadsController::class, 'document_store'])->name('admin.document.upload.edit.store');
+
+   Route::post('document-upload-change-status', [UploadsController::class, 'document_status_update'])->name('admin.document.upload.status.update');
+
+   ///upload files in document upload
+   Route::post('document-upload-file', [UploadsController::class, 'uploadFile'])
+    ->name('admin.document.upload.file');
+
+    
+
+   
+
+   
 
   });
 
