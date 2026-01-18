@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -27,72 +28,84 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('theme/admin-assets/images/favicon.png') }}" />
     <style>
-    /* Toggle Switch */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 52px;
-    height: 26px;
-}
+        /* Avatar */
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
 
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 26px;
+        }
 
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
-    border-radius: 34px;
-}
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 20px;
-    width: 20px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-}
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
 
-/* ON state */
-input:checked + .slider {
-    background-color: #28a745;
-}
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
 
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
+        /* ON state */
+        input:checked+.slider {
+            background-color: #28a745;
+        }
 
-/* OFF label */
-.slider::after {
-    /* content: 'OFF'; */
-    color: #fff;
-    font-size: 10px;
-    position: absolute;
-    right: 7px;
-    top: 6px;
-}
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
 
-/* ON label */
-input:checked + .slider::after {
-    /* content: 'ON'; */
-    left: 8px;
-    right: auto;
-}
+        /* OFF label */
+        .slider::after {
+            /* content: 'OFF'; */
+            color: #fff;
+            font-size: 10px;
+            position: absolute;
+            right: 7px;
+            top: 6px;
+        }
 
-</style>
+        /* ON label */
+        input:checked+.slider::after {
+            /* content: 'ON'; */
+            left: 8px;
+            right: auto;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container-scroller">
         {{-- <div class="row p-0 m-0 proBanner" id="proBanner">
@@ -139,4 +152,5 @@ input:checked + .slider::after {
 
     @yield('js')
 </body>
+
 </html>
