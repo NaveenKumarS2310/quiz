@@ -121,9 +121,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('user.create.index') }}">Create & edit users</a>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="{{ route('role.index') }}">Role assign</a>
-                    </li> --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('user.token.index') }}">Token management</a>
+                    </li>
                 </ul>
             </div>
         </li>

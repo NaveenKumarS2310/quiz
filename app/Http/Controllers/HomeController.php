@@ -6,6 +6,7 @@ use App\Models\QuizList;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\MasterSetting;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,14 @@ class HomeController extends Controller
     {
         
         $latest_quiz = QuizList::latest()->limit(30)->get();
-        return view('home', compact('latest_quiz'));
+
+        $token = MasterSetting::first();
+
+        $users = User::where('id', Auth::id())->first();
+
+       // dd($users);
+
+        return view('home', compact('latest_quiz', 'token', 'users'));
     }
     
     public function privacy_policy()

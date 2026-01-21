@@ -28,18 +28,23 @@
                                     </button></a>
                             </center>
 
+                            {{-- <?php $collectedToday = ''; ?> --}}
+
                             @if (auth()->check())
                                 {{-- Divider --}}
                                 <hr class="my-3">
 
                                 {{-- Daily Token Section --}}
                                 @php
-                                    $collectedToday = auth()->user()->last_token_collected_at === now()->toDateString();
+                                    $collectedToday =
+                                        $users->last_token_collected_at &&
+                                        $users->last_token_collected_at->toDateString() === now()->toDateString();
                                 @endphp
+
 
                                 <button id="collectTokenBtn"
                                     class="btn btn-success {{ $collectedToday ? 'disabled' : '' }}">
-                                    🎁 Collect 10 Daily Tokens
+                                    🎁 Collect {{ $token->token_limit }} Daily Tokens
                                 </button>
 
                                 <p class="mt-2 mb-0">
@@ -71,7 +76,7 @@
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
 
-       
+
 
 
 
@@ -151,11 +156,14 @@
     </section>
 @endsection
 @section('script')
- <script>
-            $('#collectTokenBtn').click(function() {
+    <script>
+        $('#collectTokenBtn').click(function() {
 
-                
-                @if($collectedToday)
+            var token = {!! json_encode($token->token_limit) !!};
+
+
+            @if ($collectedToday)
+
 
                 Swal.fire({
                     title: 'You have Already Collected your token',
@@ -166,42 +174,41 @@
                 });
 
                 return;
+            @endif
 
-                @endif
+            Swal.fire({
+                title: 'Collect Daily Tokens?',
+                text: 'You will receive ' + token + ' tokens',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Collect'
+            }).then((result) => {
+                if (result.isConfirmed) {
 
-                Swal.fire({
-                    title: 'Collect Daily Tokens?',
-                    text: 'You will receive 10 tokens',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonText: 'Collect'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('token.collect') }}",
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(res) {
 
-                        $.ajax({
-                            url: "{{ route('token.collect') }}",
-                            type: "POST",
-                            data: {
-                                _token: "{{ csrf_token() }}"
-                            },
-                            success: function(res) {
-
-                                if (res.status === 'success') {
-                                    Swal.fire('Success!', res.message, 'success');
-                                    $('#tokenCount').text(res.tokens);
-                                    setTimeout(() => location.reload(), 1600);
-                                } else {
-                                    Swal.fire('Oops!', res.message, 'warning');
-                                }
-
-                              
-
+                            if (res.status === 'success') {
+                                Swal.fire('Success!', res.message, 'success');
+                                $('#tokenCount').text(res.tokens);
+                                setTimeout(() => location.reload(), 1600);
+                            } else {
+                                Swal.fire('Oops!', res.message, 'warning');
                             }
-                        });
 
-                    }
-                });
 
+
+                        }
+                    });
+
+                }
             });
-        </script>
+
+        });
+    </script>
 @endsection

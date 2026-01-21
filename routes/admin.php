@@ -132,5 +132,10 @@ Route::middleware('basic.auth')->group(function () {
   Route::post('/user-create-by-admin', [AdminManageController::class, 'create_user'])->name('user.create');
   Route::post('/delete-user', [AdminManageController::class, 'delete_user'])->name('user.delete');
 
+  ///token
+  Route::get('/token-manager', [AdminManageController::class, 'token_index'])->name('user.token.index');
+  Route::post('/token-limit-update', [AdminManageController::class, 'update_token_limit'])->name('token.limit.update');
+  
+
  });
 });
