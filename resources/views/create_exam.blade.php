@@ -1,25 +1,115 @@
 @section('title', 'Create Exam')
 @section('description', 'Create Exam')
 @section('keywords', 'Create Exam')
-
-@extends('layouts.master')
-@section('content')
-
+@section('css')
     <style>
+        /* Custom Enhancements for the Form */
+
+        :root {
+            --primary-coral: #ff4d4d;
+            --primary-coral-dark: #e63e3e;
+        }
+
+       
+
+        .card {
+            border-radius: 1.25rem;
+        }
+
+        /* Enhanced Form Controls */
+        .custom-input,
+        .custom-select {
+            border: 2px solid #f1f5f9;
+            border-radius: 0.75rem;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            background-color: #fcfdfe;
+        }
+
+        .custom-input:focus,
+        .custom-select:focus {
+            border-color: var(--primary-coral);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(255, 77, 77, 0.1);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 0.75rem;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-coral) 0%, var(--primary-coral-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, var(--primary-coral-dark) 0%, #cc3333 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 77, 77, 0.3);
+        }
+
+        .letter-spacing-1 {
+            letter-spacing: 1px;
+        }
+
+        /* Layout Utilities */
+        .bg-primary-subtle {
+            background-color: rgba(255, 77, 77, 0.1) !important;
+        }
+
+        .text-primary {
+            color: var(--primary-coral) !important;
+        }
+
+        /* Animations */
+        .card {
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         .input-group {
             flex-wrap: nowrap;
         }
     </style>
+@endsection
+@extends('layouts.master')
+@section('content')
 
-    <section class="emPage__public padding-t-70">
+    <section class="bg-light emPage__public padding-t-70 p-2 pt-5 mt-5">
 
-        <!-- Start title -->
+        {{-- <!-- Start title -->
         <div class="emTitle_co padding-20">
             <h2 class="size-16 weight-500 color-secondary mb-1">Create Exams</h2>
         </div>
-        <!-- End. title -->
+        <!-- End. title --> --}}
 
-        <div class="bg-white padding-20">
+        {{-- <div class="bg-white padding-20">
 
             <div class="form-group">
                 <label>Exam Name</label>
@@ -56,6 +146,69 @@
                     id="add_btn">Submit Questions</button>
             </div>
             <br><br><br>
+        </div> --}}
+        <div class="card border-0 shadow-sm overflow-hidden">
+            <!-- Header Section -->
+            <div class="card-header bg-white border-bottom py-4 px-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h1 class="h4 fw-bold mb-1">Create New Exam</h1>
+                        <p class="text-muted small mb-0">Set up your exam parameters and question bank.</p>
+                    </div>
+                    {{-- <div class="step-indicator">
+                        <span class="badge rounded-pill bg-primary-subtle text-primary px-3">Step 1 of 2</span>
+                    </div> --}}
+                </div>
+            </div>
+
+            <div class="card-body p-3">
+                
+                    <!-- Exam Name Field -->
+                    <div class="mb-4 form-group">
+                        <label for="examName" class="form-label fw-semibold mb-2">
+                            <i class="bi bi-pencil-square me-2 text-primary"></i>&nbsp;&nbsp;Exam Name
+                        </label>
+                        <input type="text" class="form-control form-control-lg custom-input" id="add_name"
+                            placeholder="e.g. Political Science Midterm 2026">
+                    </div>
+
+                    <!-- Category Selection -->
+                    <div class="mb-4 form-group">
+                        <label for="category" class="form-label fw-semibold mb-2">
+                            <i class="bi bi-tag me-2 text-primary"></i>&nbsp;&nbsp;Category
+                        </label>
+                        <select class="form-select form-select-md custom-select" id="add_category">
+                             <?php
+                            foreach ($category as $da) {
+                                echo "<option value='" . $da->id . "'>" . $da->name . ' - ' . $da->category_name . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <!-- Questions Configuration -->
+                    <div class="mb-5 form-group">
+                        <label class="form-label fw-semibold mb-2">
+                            <i class="bi bi-list-ol me-2 text-primary"></i>&nbsp;&nbsp;Number of Questions
+                        </label>
+                        <div class="input-group input-group-lg">
+                            <input type="number" class="form-control form-control-sm custom-input" placeholder="Enter amount"
+                                id="add_numbers">
+                            <button class="btn btn-primary btn-sm px-4 fw-medium" type="button" id="qus_btn">
+                                <i class="bi bi-plus-lg me-1"></i>Add
+                            </button>
+                        </div>
+                        <div class="form-text mt-2">Recommended: 15-30 questions for better engagement.</div>
+                    </div>
+                    <div class="form-group" id="qustions_div"></div>
+                    <!-- Submit Action -->
+                    <div class="d-grid gap-2 form-group">
+                        <button type="submit" class="btn btn-submit btn-sm py-3 fw-bold text-uppercase letter-spacing-1" id="add_btn">
+                            Submit Questions <i class="bi bi-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+               
+            </div>
         </div>
 
     </section>

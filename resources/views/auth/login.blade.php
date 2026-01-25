@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="{{ url('/') }}/theme/assets/css/owl.carousel.min.css">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{ url('/') }}/theme/assets/css/main.css">
+    <link rel="stylesheet" href="{{ url('/') }}/theme/assets/css/main.css?v=1">
     <!-- normalize.css v8.0.1 -->
     <link rel="stylesheet" href="{{ url('/') }}/theme/assets/css/normalize.css">
 
@@ -109,10 +109,7 @@
                 <form action="{{ route('login_submit') }}" method="POST">
                     @csrf
                     <div class="em_titleSign">
-                        <h1>Welcome back to</h1>
-                        <div class="brand">
-                            <h2>{{ env('APP_NAME') }}</h2>
-                        </div>
+                        <h1 class="brand">Welcome to <span style="color: #FF3F3F !important;">{{ env('APP_NAME') }}</span></h1>
                     </div>
                     <div class="em__body">
 
@@ -158,30 +155,30 @@
                                         <g id="Password" transform="translate(2 2)">
                                             <path id="Stroke_1" data-name="Stroke 1"
                                                 d="M13.584,0H4.915C1.894,0,0,2.139,0,5.166v8.168C0,16.361,1.885,18.5,4.915,18.5h8.668c3.031,0,4.917-2.139,4.917-5.166V5.166C18.5,2.139,16.614,0,13.584,0Z"
-                                                transform="translate(0.75 0.75)" fill="none" stroke="#200e32"
+                                                transform="translate(0.75 0.75)" fill="none" stroke="#200E32"
                                                 stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
                                                 stroke-width="1.5" opacity="0.4" />
                                             <path id="Stroke_3" data-name="Stroke 3"
                                                 d="M3.7,1.852A1.852,1.852,0,1,1,1.851,0,1.852,1.852,0,0,1,3.7,1.852Z"
-                                                transform="translate(4.989 8.148)" fill="none" stroke="#200e32"
+                                                transform="translate(4.989 8.148)" fill="none" stroke="#200E32"
                                                 stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
                                                 stroke-width="1.5" />
                                             <path id="Stroke_5" data-name="Stroke 5" d="M0,0H6.318V1.852"
-                                                transform="translate(8.692 10)" fill="none" stroke="#200e32"
+                                                transform="translate(8.692 10)" fill="none" stroke="#200E32"
                                                 stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
                                                 stroke-width="1.5" />
                                             <path id="Stroke_7" data-name="Stroke 7" d="M.5,1.852V0"
-                                                transform="translate(11.682 10)" fill="none" stroke="#200e32"
+                                                transform="translate(11.682 10)" fill="none" stroke="#200E32"
                                                 stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
                                                 stroke-width="1.5" />
                                         </g>
                                     </svg>
                                 </div>
-                                <div style="">
+                                
                                     <button type="button" class="btn hide_show icon_password">
                                         <i class="tio-hidden_outlined"></i>
                                     </button>
-                                </div>
+                                
                             </div>
                             @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>

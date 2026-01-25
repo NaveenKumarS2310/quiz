@@ -74,10 +74,11 @@
                 <form action="{{ route('register_submit') }}" method="POST">
                     @csrf
                     <div class="em_titleSign">
-                        <h1>Welcome to</h1>
-                        <div class="brand">
-                            <h2>{{ env('APP_NAME') }}</h2>
-                        </div>
+                        <h1 class="brand">Welcome to <span style="color: #FF3F3F !important;">{{ env('APP_NAME') }}</span></h1>
+                        {{-- <div class="brand">
+                            <h2 >{{ env('APP_NAME') }}</h2>
+                        </div> --}}
+                        <h6>Create your account and start your journey</h6>
                     </div>
                     <div class="em__body">
                         <div class="form-group with_icon">
@@ -220,8 +221,8 @@
                         <button type="submit"
                             class="btn bg-primary color-white justify-content-center">Register</button>
                         <a href="{{ route('login') }}" class="btn hover:color-secondary justify-content-center">I
-                            Already have a Account!
-                            Login</a>
+                            Already have an Account?&nbsp; &nbsp;
+                             <span class="fw-semibold" style="color: #FF3F3F !important; text-decoration: underline; cursor: pointer;"> Login</span></a>
                     </div>
                 </form>
             </section>

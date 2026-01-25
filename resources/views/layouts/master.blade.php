@@ -21,7 +21,7 @@
         content="tnpsc,tnpsc group,tnpsc group 4,tnpsc group 2,tnpsc group 1,tnpsc departmental exam,tnpsc exam,group 4 exam,tnpsc academy,vao exam,tnpsc group 4 hall ticket,tnpsc group 4 exam,tnpsc group 4 syllabus,tnpsc group 2 syllabus,tnpsc books,tnpsc portal,tnpsc group 1 syllabus,tnpsc hall ticket,tnpsc notification,tnpsc group 2 notification,tnpsc syllabus,tnpsc portal current affairs,tnpsc result,tnpsc group 4 study materials,tnpsc group 4 previous year question papers,tnpsc group 2 previous year question papers,tnpsc login,tnpsc group 4 apply online,tnpsc official website,tnpsc answer key, tnpsc previous year question papers,tnpscacademy,group 2 previous year question papers,tnpsc group 4 books,group 4 question papers,tnpsc group 4 app,group 4 previous year question papers,tnpsc question papers,tnpsc thervupettagam,tnpsc website,tnpsc group 4 question papers,tnpsc group 4 general tamil,tnpsc hall ticket download,tnpsc group 2 syllabus,group 4 syllabus,tnpsc group 4syllabus">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    
+
     <!-- favicon -->
     <link rel="icon" type="image/png" href="{{ url('/') }}/favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" href="{{ url('/') }}/favicon.png">
@@ -30,7 +30,7 @@
     <!-- bootstrap v4.6.0 -->
     <link rel="stylesheet" href="{{ url('/') }}/theme/assets/css/bootstrap.min.css">
 
-    
+
     <!--
         theiconof v3.0
         https://www.theiconof.com/search
@@ -41,7 +41,7 @@
     <!-- Owl Carousel v2.3.4 -->
     <link rel="stylesheet" href="{{ url('/') }}/theme/assets/css/owl.carousel.min.css">
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{ url('/') }}/theme/assets/css/main.css">
+    <link rel="stylesheet" href="{{ url('/') }}/theme/assets/css/main.css?v=1">
     <!-- normalize.css v8.0.1 -->
     <link rel="stylesheet" href="{{ url('/') }}/theme/assets/css/normalize.css">
 
@@ -62,6 +62,10 @@
             color: #fff;
         }
 
+        .-sticky .em_brand span {
+            color: #fff;
+        }
+
         .nav-item .icon_active {
             display: none;
         }
@@ -79,7 +83,7 @@
             color: var(--bg-red) !important;
         }
 
-         .user-avatar {
+        .user-avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -91,7 +95,9 @@
             font-weight: bold;
         }
 
-        
+        .main_haeder .em_side_right .btn {
+            margin-left: 6rem !important;
+        }
     </style>
 
 
@@ -99,7 +105,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3729413945402608"
         crossorigin="anonymous"></script>
 
-        
+
 
 
     <!-- Google Tag Manager -->
@@ -154,16 +160,12 @@
         <div id="content">
             <!-- Start main_haeder -->
             <header class="main_haeder bg-transparent header-sticky">
-                <div class="em_menu_sidebar">
-                    <button type="button" class="btn btn_menuSidebar item-show" data-toggle="modal"
-                        data-target="#sidebarMenu">
-                        <i class="tio-menu_hamburger"></i>
-                    </button>
-                </div>
+
                 <div class="em_brand">
                     <a href="{{ url('/') }}" class="size-15 weight-600">
                         <i class="tio-earth_east"></i> Quiz Universe
                     </a>
+                    <span class="em_brand">Learn & Play</span>
                 </div>
                 <div class="em_side_right">
                     {{-- <button type="button" class="btn btn_meunSearch" id="saerch-On-header">
@@ -180,6 +182,12 @@
                             </g>
                         </svg>
                     </button> --}}
+                </div>
+                <div class="em_menu_sidebar">
+                    <button type="button" class="btn btn_menuSidebar item-show" data-toggle="modal"
+                        data-target="#sidebarMenu">
+                        <i class="tio-menu_hamburger"></i>
+                    </button>
                 </div>
             </header>
             <!-- End.main_haeder -->
@@ -230,9 +238,9 @@
     <!-- bootstrap.js v4.6.0 -->
     <script src="{{ url('/') }}/theme/assets/js/bootstrap.min.js"></script>
 
-       <!-- main.js -->
+    <!-- main.js -->
     <script src="{{ url('/') }}/theme/assets/js/main.js" defer></script>
-    
+
     <!-- Owl Carousel v2.3.4 -->
     <script src="{{ url('/') }}/theme/assets/js/vendor/owl.carousel.min.js"></script>
     <!-- Swiper 6.4.11 -->
@@ -243,7 +251,7 @@
     <script src="{{ url('/') }}/theme/assets/js/vendor/short-and-sweet.min.js"></script>
     <!-- jquery knob -->
     <script src="{{ url('/') }}/theme/assets/js/vendor/jquery.knob.min.js"></script>
- 
+
     <!-- PWA app service registration and works js -->
     <script src="{{ url('/') }}/theme/assets/js/pwa-services.js"></script>
 
