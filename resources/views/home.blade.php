@@ -234,9 +234,15 @@
 
                                 {{-- Daily Token Section --}}
                                 @php
+<<<<<<< Updated upstream
                                     $collectedToday =
                                         $users->last_token_collected_at &&
                                         $users->last_token_collected_at->toDateString() === now()->toDateString();
+=======
+                                
+                                    $collectedToday = auth()->user()->last_token_collected_at === now()->toDateString();
+                                  
+>>>>>>> Stashed changes
                                 @endphp
 
 
@@ -375,6 +381,11 @@
 
             @if (isset($collectedToday))
 
+<<<<<<< Updated upstream
+=======
+                
+                @if(isset($collectedToday))
+>>>>>>> Stashed changes
 
                 Swal.fire({
 

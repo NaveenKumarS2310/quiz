@@ -15,6 +15,7 @@ class AuthController extends Controller
     }
     public function register_submit(Request $request)
     {
+        // dd($request->password);
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',

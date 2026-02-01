@@ -4,9 +4,13 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoleController;
+<<<<<<< Updated upstream
 use App\Http\Controllers\Admin\UploadsController;
 use App\Http\Controllers\Admin\AdminManageController;
 
+=======
+use App\Http\Controllers\Admin\TestUploadController;
+>>>>>>> Stashed changes
 
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +63,7 @@ Route::middleware('basic.auth')->group(function () {
    Route::post('update/status/document-category', [CategoryController::class, 'Document_status_update'])->name('admin.document.category.status.update');
   });
 
+<<<<<<< Updated upstream
   Route::prefix('uploads')->group(function(){
 
    ////////////////Job
@@ -138,4 +143,10 @@ Route::middleware('basic.auth')->group(function () {
   
 
  });
+=======
+        Route::get('/users-list', [RoleController::class, 'index'])->name('role.index');
+        Route::post('/role-change', [RoleController::class, 'role_changer'])->name('role.change');
+        Route::get('/free-quiz', [TestUploadController::class, 'free_quiz'])->name('quiz.free');
+    });
+>>>>>>> Stashed changes
 });
