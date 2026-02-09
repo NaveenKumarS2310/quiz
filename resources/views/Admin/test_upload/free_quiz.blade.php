@@ -20,7 +20,9 @@
                     <i class="mdi mdi-format-align-left"></i>
                 </span> Free Quiz List
             </h3>
-            <a type="button" class="btn btn-primary btn-sm">Add New Test</a>
+            <a href="{{ route('upload.free-quiz.index') }}" class="btn btn-primary btn-sm">
+                Add New Test
+            </a>
         </div>
         <div class="row">
             <div class="col-12 grid-margin">
@@ -42,14 +44,13 @@
                                 @foreach ($free_quiz_list as $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->test_name }}</td>
                                         <td>{{ $data->category_name }}</td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-sm btn-outline-primary role-action"
-                                                data-id="" data-role="">
-                                                <i class="bi bi-pencil-square me-1"></i>
-                                                Edit
-                                            </button>
+                                            <a href="{{ route('upload.free-quiz.edit', $data->id) }}"
+                                                class="btn btn-sm btn-outline-primary">
+                                                ADD / Edit Questions
+                                            </a>
                                         </td>
 
 

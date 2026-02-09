@@ -67,14 +67,14 @@
             <div class="collapse" id="icons">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/font-awesome.html">Free Quiz Test</a>
+                        <a class="nav-link" href="{{ route('upload.free-quiz') }}">Free Quiz Test</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="pages/icons/font-awesome.html">Free interview Test</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="pages/icons/font-awesome.html">Payment Test</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.job.upload.create.index') }}">Job</a>
                     </li>
@@ -110,6 +110,15 @@
             </div>
         </li> --}}
 
+<<<<<<< Updated upstream
+=======
+       <li class="nav-item">
+            <a class="nav-link" href="docs/documentation.html" target="_blank">
+                <span class="menu-title">Token Management</span>
+                <i class="mdi mdi-file-document-box menu-icon"></i>
+            </a>
+        </li> 
+>>>>>>> Stashed changes
         
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
