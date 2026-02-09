@@ -228,21 +228,19 @@
                                     <button class="join-btn">Join</button>
                                 </div>
                             </a>
+                            </center>
+
+                            <?php $collectedToday = ''; ?>
+
                             @if (auth()->check())
                                 {{-- Divider --}}
                                 <hr class="my-3">
 
                                 {{-- Daily Token Section --}}
                                 @php
-<<<<<<< Updated upstream
                                     $collectedToday =
                                         $users->last_token_collected_at &&
                                         $users->last_token_collected_at->toDateString() === now()->toDateString();
-=======
-                                
-                                    $collectedToday = auth()->user()->last_token_collected_at === now()->toDateString();
-                                  
->>>>>>> Stashed changes
                                 @endphp
 
 
@@ -379,13 +377,7 @@
         $('#collectTokenBtn').click(function() {
 
 
-            @if (isset($collectedToday))
-
-<<<<<<< Updated upstream
-=======
-                
-                @if(isset($collectedToday))
->>>>>>> Stashed changes
+            @if ($collectedToday)
 
                 Swal.fire({
 
