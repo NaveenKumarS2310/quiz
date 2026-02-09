@@ -20,11 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-<<<<<<< Updated upstream
         'password',
-=======
-         'password',
->>>>>>> Stashed changes
         'role',
         'my_tokens',
         'last_token_collected_at'
