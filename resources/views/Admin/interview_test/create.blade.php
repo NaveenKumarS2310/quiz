@@ -1,5 +1,5 @@
 @extends('Admin.master-layouts.admin-master')
-@section('title', 'Free Test')
+@section('title', 'Interview Test Master')
 @section('css')
 @stop
 @section('pageheader')
@@ -14,7 +14,7 @@
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                     <i class="mdi mdi-home"></i>
-                </span> Free Test Master
+                </span> Interview Test Master
             </h3>
             <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
@@ -28,11 +28,11 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Free Test Master Add</h4>
-                        <p class="card-description"> create Test Master </p>
+                        <h4 class="card-title">Interview Test Master Add</h4>
+                        <p class="card-description"> create Interview Test Master </p>
 
 
-                        <form class="forms-sample" action="{{ route('upload.free-quiz.store') }}" method="POST">
+                        <form class="forms-sample" action="{{ route('upload.free-interview.store') }}" method="POST">
                             @csrf
 
                             {{-- Correct hidden id --}}
