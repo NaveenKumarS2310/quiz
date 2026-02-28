@@ -28,7 +28,7 @@
                 <div class="modal-header">
                     <div class="em_profile_user">
                         <div class="media">
-                            <a href="profile">
+                            <a href="profile" class="me-3">
                                 {{-- <img class="_imgUser" src="{{ url('/') }}/user-icon.png" alt=""> --}}
                                  {{-- <img class="avatar avatar-xxl avatar-4x3"
                                     src="{{ asset('assets/new_assets/img/integrations-logo/zapier-banner.png') }}"
@@ -38,13 +38,13 @@
                                 <div class="user-avatar me-3">{{$av[0]}}</div>
                                 <p style="color: red;">{{ auth()->user()->role }}</p>
                             </a>
-                            <div class="media-body">
-                                <div class="txt">
+                            <div class="media-body" style="margin-left: 20px;">
+                                <div class="txt ">
                                     <form action="{{ url('sign-out') }}" method="POST">
                                         @csrf
-                                        <h3>{{ auth()->user()->name }}</h3>
+                                        <h3 class="ms-3">{{ auth()->user()->name }}</h3>
                                         <p>{{ auth()->user()->email }}</p>
-                                        <button type="submit" class="btn btn_logOut">Sign out</button>
+                                        <button type="submit" class="btn btn_logOut mt-3">Sign out</button>
                                     </form>
                                 </div>
                             </div>

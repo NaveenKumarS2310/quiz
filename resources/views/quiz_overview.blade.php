@@ -11,10 +11,15 @@
   --btn-radius: 12px;
 }
 
+@media (max-width: 576px) {
+  .quiz-card {
+    max-width: 550px;
+  }
+}
 
 
 .quiz-card {
-  max-width: 550px;
+  max-width: 100%;
   width: 100%;
   border-radius: var(--card-radius);
 }
@@ -126,7 +131,7 @@
                         </div>
                         <div class="stat-info d-flex justify-content-between flex-grow-1 align-items-center">
                             <span class="stat-label text-muted fw-medium">Total Questions</span>
-                            <span class="stat-value fw-bold text-dark">: {{ $quiz->noq }}</span>
+                            <span class="stat-value fw-bold text-dark">: {{ $quiz->noq }} ques</span>
                         </div>
                     </div>
 
