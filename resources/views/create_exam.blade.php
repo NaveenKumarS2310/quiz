@@ -192,7 +192,7 @@
                             <i class="bi bi-list-ol me-2 text-primary"></i>&nbsp;&nbsp;Number of Questions
                         </label>
                         <div class="input-group input-group-lg">
-                            <input type="number" class="form-control form-control-sm custom-input" placeholder="Enter amount"
+                            <input type="number" class="form-control form-control-sm custom-input" placeholder="Enter Question Numbers"
                                 id="add_numbers">
                             <button class="btn btn-primary btn-sm px-4 fw-medium" type="button" id="qus_btn">
                                 <i class="bi bi-plus-lg me-1"></i>Add

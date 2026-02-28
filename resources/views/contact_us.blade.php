@@ -87,19 +87,19 @@
                     
                         <div class="social-links">
                             <h4>Join us social media:</h4>
-                            <a href="https://www.instagram.com/quiz_universe0/" target="_blank">Instagram</a>
-                            <a href="https://chat.whatsapp.com/Cw1qAyD7VIkFbNB4rmm356" target="_blank">Whatsapp</a>
-                            <a href="https://t.me/quizunivers" target="_blank">Telegram</a>
+                            <a href="https://www.instagram.com/quiz_universe0/" target="_blank"><i class="bi bi-instagram"></i></a>
+                            <a href="https://chat.whatsapp.com/Cw1qAyD7VIkFbNB4rmm356" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                            <a href="https://t.me/quizunivers" target="_blank"><i class="bi bi-telegram"></i></a>
                         </div>
                     
                         <div class="social-links">
                             <h4>Contact Email</h4>
-                            <p><strong>Email : </strong>info@quizuniverse.in</p>
+                            <p><strong><i class="bi bi-envelope"></i> : </strong>info@quizuniverse.in</p>
                         </div>
                     
                         <div class="social-links">
                             <h4>Contact Whatsapp</h4>
-                            <p><strong>Whatsapp : </strong><a href="https://wa.me/qr/TOEFOC7D75H2H1">Click To Text</a></p>
+                            <p><strong><i class="bi bi-whatsapp"></i> : </strong><a href="https://wa.me/qr/TOEFOC7D75H2H1">Click To Text</a></p>
                         </div>
      
                         

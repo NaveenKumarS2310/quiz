@@ -360,7 +360,7 @@
                             <div class="stat-value">{{ $currect_answer }}</div>
                         </div>
                     </div>
-                    <div class="col-6 col-md-3">
+                    {{-- <div class="col-6 col-md-3">
                         <div class="stat-item p-3 rounded-4 bg-white border h-100 transition-hover">
                             <div class="stat-icon-3 bg-warning-subtle text-warning mb-2">
                                 <i class="bi bi-dash-circle-fill"></i>
@@ -368,7 +368,7 @@
                             <div class="stat-label">Skipped</div>
                             <div class="stat-value">{{ $not_answered }}</div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-6 col-md-3">
                         <div class="stat-item p-3 rounded-4 bg-white border h-100 transition-hover">
                             <div class="stat-icon-4 bg-danger-subtle text-danger mb-2">

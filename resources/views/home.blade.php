@@ -246,7 +246,7 @@
 
                                 <button id="collectTokenBtn"
                                     class="btn btn-success {{ $collectedToday ? 'disabled' : '' }}">
-                                    🎁 Collect {{ $token->token_limit }} Daily Tokens
+                                    🎁 Collect {{ $token->token_limit ?? 20 }} Daily Tokens
                                 </button>
 
                                 <p class="mt-2 mb-0">

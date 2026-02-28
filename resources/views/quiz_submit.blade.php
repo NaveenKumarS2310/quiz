@@ -2,94 +2,284 @@
 @section('description', $quiz->name)
 @section('keywords', $quiz->name)
 @section('css')
-<style>
- 
-
-    .tracking-tighter {
-      letter-spacing: -0.05em;
-    }
-
-    .tracking-tight {
-      letter-spacing: -0.025em;
-    }
-
-    .leading-snug {
-      line-height: 1.4;
-    }
-
-    .question-index {
-      color: #eaeaea;
-      font-variant-numeric: tabular-nums;
-      min-width: 40px;
-    }
-
-    .option-letter {
-      color: #999;
-    }
-
-    .option-item {
-      transition: all 0.2s ease;
-      border-width: 1px !important;
-    }
-
-    .bg-success-subtle {
-      background-color: #f0fdf4 !important;
-    }
-
-    .text-success {
-      color: #16a34a !important;
-    }
-
-    .border-success {
-      border-color: #16a34a !important;
-    }
-
-    .question-block {
-      animation: fadeIn 0.5s ease-out forwards;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Hover effects for better interactivity */
-    .option-item:hover {
-      border-color: #000;
-      opacity: 1 !important;
-    }
-
-    @media (max-width: 768px) {
-      .display-5 {
-        font-size: 2.5rem;
-      }
-
-      .question-index {
-        min-width: 30px;
-        font-size: 1.25rem !important;
-      }
-    }
-  </style>
+   
 @endsection
 @extends('layouts.master')
 @section('content')
 
+   
     <style>
-        .text-green {
-            color: rgb(0, 112, 0) !important;
-            font-weight: 800;
+        :root {
+            --primary-color: #ef5350;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --bg-light: #fafafa;
+            --bg-white: #ffffff;
+            --border-light: #e8e8e8;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
         }
 
-        .text-red {
-            color: rgb(189, 5, 5) !important;
-            font-weight: 800;
+        /* Header Styles */
+        h1 {
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        h3 {
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+
+        /* Question Section */
+        .question-section {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: all 0.2s ease;
+        }
+
+        .question-section:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #f44336 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(239, 83, 80, 0.2);
+        }
+
+        .question-title {
+            font-size: 18px;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .question-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin: 0;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Options Container */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 16px;
+            border: 1.5px solid var(--border-light);
+            border-radius: 10px;
+            background: var(--bg-white);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .option-item:hover {
+            border-color: var(--text-secondary);
+            background: #fafafa;
+        }
+
+        /* Correct Option */
+        .option-item.option-correct {
+            border-color: var(--success-color);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.08) 0%, rgba(76, 175, 80, 0.04) 100%);
+        }
+
+        .option-item.option-correct:hover {
+            border-color: var(--success-color);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.12) 0%, rgba(76, 175, 80, 0.08) 100%);
+        }
+
+        /* Incorrect Option */
+        .option-item.option-incorrect {
+            border-color: var(--error-color);
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.08) 0%, rgba(244, 67, 54, 0.04) 100%);
+        }
+
+        .option-item.option-incorrect:hover {
+            border-color: var(--error-color);
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.12) 0%, rgba(244, 67, 54, 0.08) 100%);
+        }
+
+        /* Option Indicator */
+        .option-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .option-label {
+            width: 32px;
+            height: 32px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .option-item.option-correct .option-label {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .option-item.option-incorrect .option-label {
+            background: var(--error-color);
+            color: white;
+        }
+
+        .option-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .option-item.option-correct .option-icon {
+            color: var(--success-color);
+        }
+
+        .option-item.option-incorrect .option-icon {
+            color: var(--error-color);
+        }
+
+        /* Option Content */
+        .option-content {
+            flex-grow: 1;
+        }
+
+        .option-text {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .correct-badge {
+            background: rgba(76, 175, 80, 0.15);
+            color: var(--success-color);
+        }
+
+        .incorrect-badge {
+            background: rgba(244, 67, 54, 0.15);
+            color: var(--error-color);
+        }
+
+        /* Buttons */
+        .btn {
+            font-weight: 600;
+            font-size: 14px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            border: none;
+            letter-spacing: -0.2px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #f44336 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(239, 83, 80, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(239, 83, 80, 0.35);
+            color: white;
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-outline-secondary {
+            color: var(--text-secondary);
+            border: 1.5px solid var(--border-light);
+            background: var(--bg-white);
+        }
+
+        .btn-outline-secondary:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+            background: #fafafa;
+        }
+
+        /* Gradient Background */
+        .bg-gradient-light {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f5f5f5 100%);
+        }
+
+        /* Utility Classes */
+        .flex-grow-1 {
+            flex-grow: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .question-section {
+                padding: 16px;
+            }
+
+            .question-header {
+                gap: 12px;
+            }
+
+            .option-item {
+                padding: 12px 14px;
+            }
+
+            .btn {
+                padding: 10px 18px;
+                font-size: 13px;
+            }
         }
     </style>
 
@@ -141,8 +331,96 @@
                 </div>
             </section>
         </div> --}}
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <!-- Question 1 -->
+                @php $qust_no = 1; @endphp
+                @foreach ($qustions as $qustion)
+                    <div class="question-section mb-4">
+                        <div class="question-header">
+                            <div class="question-number">
+                                <span>{{ $qust_no++ }}</span>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h3 class="question-title mb-0">{{ $qustion->qustion }}</h3>
+                                {{-- <p class="question-meta">Multiple Choice</p> --}}
+                            </div>
+                        </div>
 
-        @php $qust_no = 1; @endphp
+                        <!-- Options -->
+                        <div class="options-container">
+
+                            @php
+                                $options = [
+                                    1 => $qustion->option1,
+                                    2 => $qustion->option2,
+                                    3 => $qustion->option3,
+                                    4 => $qustion->option4,
+                                ];
+
+                                $labels = ['A', 'B', 'C', 'D'];
+                                $userAnswer = $answer_list[$qustion->id] ?? null;
+                            @endphp
+
+                            @foreach ($options as $key => $value)
+                                @php
+                                    $isCorrect = $qustion->answer == $key;
+                                    $isUserAnswer = $userAnswer == $key;
+                                    $isWrong = $isUserAnswer && !$isCorrect;
+                                @endphp
+
+                                <div
+                                    class="option-item 
+                                        {{ $isCorrect ? 'option-correct' : '' }}
+                                        {{ $isWrong ? 'option-incorrect' : '' }}
+                                    ">
+
+                                    <div class="option-indicator">
+                                        <span class="option-label">{{ $labels[$key - 1] }}</span>
+
+                                        {{-- Icons --}}
+                                        @if ($isCorrect)
+                                            <span class="option-icon">
+                                                <i class="bi bi-check-circle-fill"></i>
+                                            </span>
+                                        @elseif($isWrong)
+                                            <span class="option-icon">
+                                                <i class="bi bi-x-circle-fill"></i>
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    <div class="option-content">
+                                        <p class="option-text">{{ $value }}</p>
+
+                                        {{-- ✅ Always show Correct Answer --}}
+                                        @if ($isCorrect)
+                                            <span class="status-badge correct-badge">
+                                                Correct Answer
+                                            </span>
+                                        @endif
+
+                                        {{-- ❌ Show Your Answer only if wrong --}}
+                                        @if ($isWrong)
+                                            <span class="status-badge incorrect-badge">
+                                                Your Answer
+                                            </span>
+                                        @endif
+
+                                    </div>
+
+                                </div>
+                            @endforeach
+
+                        </div>
+                    </div>
+                @endforeach
+
+
+            </div>
+        </div>
+
+        {{-- @php $qust_no = 1; @endphp
         @foreach ($qustions as $qustion)
             <!-- Start title -->
             <div class="emTitle_co padding-20">
@@ -202,7 +480,7 @@
                     </li>
                 </ul>
             </div>
-        @endforeach
+        @endforeach --}}
 
         <br>
         <br>
@@ -251,3 +529,4 @@
 @section('script')
 
 @endsection
+    
