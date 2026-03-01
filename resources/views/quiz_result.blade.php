@@ -1,10 +1,10 @@
-@section('title', $quiz->name)
-@section('description', $quiz->name)
-@section('keywords', $quiz->name)
+@section('title', $quiz->test_name)
+@section('description', $quiz->test_name)
+@section('keywords', $quiz->test_name)
 
 @extends('layouts.master')
 @section('css')
-    
+
 
     <style>
         .text-green {
@@ -118,6 +118,7 @@
             font-size: 1.25rem;
             background-color: #cfe2ff;
         }
+
         .stat-icon-2 {
             width: 40px;
             height: 40px;
@@ -128,6 +129,7 @@
             font-size: 1.25rem;
             background-color: #d1e7dd;
         }
+
         .stat-icon-3 {
             width: 40px;
             height: 40px;
@@ -138,6 +140,7 @@
             font-size: 1.25rem;
             background-color: #fff3cd;
         }
+
         .stat-icon-4 {
             width: 40px;
             height: 40px;
@@ -230,17 +233,20 @@
 
     <section class="bg-light emPage__public padding-t-70 p-2 pt-5 mt-5">
         <?php
-        $currect_answer = 0;
+        $correct_answer = 0;
         $not_answered = 0;
+        $wrong_answer = 0;
         ?>
         @foreach ($qustions as $qustion)
             <?php
-            if ($answer_list[$qustion->id] != null && $qustion->answer == $answer_list[$qustion->id]) {
-                $currect_answer++;
-                // dd('ddfd');
-            }
-            if ($answer_list[$qustion->id] == null) {
+            $selectedAnswer = $answers[$qustion->id] ?? null;
+            
+            if ($selectedAnswer === null) {
                 $not_answered++;
+            } elseif ($selectedAnswer === $qustion->correct_answer) {
+                $correct_answer++;
+            } else {
+                $wrong_answer++;
             }
             ?>
         @endforeach
@@ -248,7 +254,7 @@
 
 
         <!--<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3729413945402608" -->
-                               <!--      crossorigin="anonymous"></script>-->
+                                                                                                                                                                                                                                                                       <!--      crossorigin="anonymous"></script>-->
         <!-- <ins class="adsbygoogle"-->
         <!--      style="display:block; text-align:center;"-->
         <!--      data-ad-layout="in-article"-->
@@ -331,7 +337,7 @@
                 <!-- Title Section -->
                 <header class="text-center mb-5">
                     <h1 class="quiz-title mb-3">
-                        {{ $quiz->name }}
+                        {{ $quiz->test_name }}
                     </h1>
                     <div class="badge bg-light text-muted border px-3 py-2 rounded-pill fw-medium">
                         Daily Quiz Completed
@@ -357,7 +363,7 @@
                                 <i class="bi bi-check-circle-fill"></i>
                             </div>
                             <div class="stat-label">Correct</div>
-                            <div class="stat-value">{{ $currect_answer }}</div>
+                            <div class="stat-value">{{ $correct_answer }}</div>
                         </div>
                     </div>
                     {{-- <div class="col-6 col-md-3">
@@ -375,21 +381,28 @@
                                 <i class="bi bi-x-circle-fill"></i>
                             </div>
                             <div class="stat-label">Wrong</div>
-                            <div class="stat-value">{{ count($qustions) - $currect_answer - $not_answered }}</div>
+                            <div class="stat-value">{{ $wrong_answer }}</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="d-grid gap-3 d-md-flex justify-content-md-center">
-                    <a href="{{ url('quiz_submit') }}"
-                        class="btn btn-success btn-md px-3 py-3 fw-bold rounded-pill shadow-sm view-btn">
-                        <i class="bi bi-eye-fill me-2"></i> View Answers
-                    </a>
+                <div class="d-grid gap-3 justify-content-center">
+                    <form action="{{ url('quiz_submit') }}" method="get">
+                        @csrf
+                        <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
+                        <input type="hidden" name="type" value="{{ $type }}">
+                        <button type="submit"
+                            class="btn btn-success btn-md px-3 py-3 fw-bold rounded-pill shadow-sm view-btn">
+                            <i class="bi bi-check-circle-fill me-2"></i> Submit your answers
+                        </button>
+                    </form>
+
 
                 </div>
             </div>
         </div>
+
 
         <br>
         <br>

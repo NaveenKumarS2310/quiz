@@ -2,7 +2,7 @@
 @section('description', 'Home Page')
 @section('keywords', 'Home Page')
 @section('css')
-<style>
+    <style>
         .welcome {
             position: relative;
             margin-bottom: 20px;
@@ -233,15 +233,30 @@
         <div class="quiz-list padding-l-10 padding-r-10">
             <!-- Quiz Item 1 -->
             @foreach ($category_quiz as $cq)
-            <a href="{{ url('quiz') }}/{{ $cq->slug }}">
-                <div class="quiz-item">
-                    <div class="quiz-content">
-                        <h4 class="quiz-title">{{ $cq->name }}</h4>
-                        
+                <a class="text-decoration-none" href="{{ url('quiz') }}/{{ $type }}/{{ $cq->id }}">
+                    <div class="quiz-item">
+                        <div class="quiz-content">
+                            <h4 class="quiz-title">{{ $cq->test_name }}</h4>
+                            @php
+                                $questions = DB::table('free_test_question')->where('test_id', $cq->id)->count();
+                                $totalQuestions = $questions;
+                                $timePerQuestionSeconds = 60;
+
+                                $totalTimeMinutes = ceil(($totalQuestions * $timePerQuestionSeconds) / 60);
+                            @endphp
+                            <div class="quiz-meta d-flex justify-content-around">
+                                <span class="meta-item text-warning"><i class="bi bi-clock"></i> {{ $totalTimeMinutes }}
+                                    Mins</span>
+                                <span class="meta-item text-danger"><i class="bi bi-question-circle"></i>
+                                    {{ $totalQuestions }}
+                                    Qs</span>
+                                <span class="meta-item text-primary"><i class="bi bi-gem"></i>
+                                    {{ $cq->number_of_token }}</span>
+                            </div>
+                        </div>
+                        <button class="play-btn">▶</button>
                     </div>
-                    <button class="play-btn">▶</button>
-                </div>
-            </a>
+                </a>
             @endforeach
         </div>
 

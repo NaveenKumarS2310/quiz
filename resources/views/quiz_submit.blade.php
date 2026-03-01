@@ -1,13 +1,13 @@
-@section('title', $quiz->name)
-@section('description', $quiz->name)
-@section('keywords', $quiz->name)
+@section('title', $quiz->test_name)
+@section('description', $quiz->test_name)
+@section('keywords', $quiz->test_name)
 @section('css')
-   
+
 @endsection
 @extends('layouts.master')
 @section('content')
 
-   
+
     <style>
         :root {
             --primary-color: #ef5350;
@@ -342,7 +342,7 @@
                                 <span>{{ $qust_no++ }}</span>
                             </div>
                             <div class="flex-grow-1">
-                                <h3 class="question-title mb-0">{{ $qustion->qustion }}</h3>
+                                <h3 class="question-title mb-0">{{ $qustion->question }}</h3>
                                 {{-- <p class="question-meta">Multiple Choice</p> --}}
                             </div>
                         </div>
@@ -352,63 +352,55 @@
 
                             @php
                                 $options = [
-                                    1 => $qustion->option1,
-                                    2 => $qustion->option2,
-                                    3 => $qustion->option3,
-                                    4 => $qustion->option4,
+                                    'A' => $qustion->option_a,
+                                    'B' => $qustion->option_b,
+                                    'C' => $qustion->option_c,
+                                    'D' => $qustion->option_d,
                                 ];
 
-                                $labels = ['A', 'B', 'C', 'D'];
-                                $userAnswer = $answer_list[$qustion->id] ?? null;
+                                $correctAnswer = (string) $qustion->correct_answer;
+                                $userAnswer = isset($answer_list[$qustion->id])
+                                    ? (string) $answer_list[$qustion->id]
+                                    : null;
                             @endphp
 
                             @foreach ($options as $key => $value)
                                 @php
-                                    $isCorrect = $qustion->answer == $key;
-                                    $isUserAnswer = $userAnswer == $key;
-                                    $isWrong = $isUserAnswer && !$isCorrect;
+                                    $isCorrect = $key === $correctAnswer;
+                                    $isUserAnswer = $key === $userAnswer;
                                 @endphp
 
                                 <div
-                                    class="option-item 
-                                        {{ $isCorrect ? 'option-correct' : '' }}
-                                        {{ $isWrong ? 'option-incorrect' : '' }}
-                                    ">
-
+                                    class="option-item
+        {{ $isCorrect ? 'option-correct' : '' }}
+        {{ $isUserAnswer && !$isCorrect ? 'option-incorrect' : '' }}
+    ">
                                     <div class="option-indicator">
-                                        <span class="option-label">{{ $labels[$key - 1] }}</span>
+                                        <span class="option-label">{{ $key }}</span>
 
-                                        {{-- Icons --}}
                                         @if ($isCorrect)
-                                            <span class="option-icon">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                            </span>
-                                        @elseif($isWrong)
-                                            <span class="option-icon">
-                                                <i class="bi bi-x-circle-fill"></i>
-                                            </span>
+                                            <i class="bi bi-check-circle-fill"></i>
+                                        @elseif ($isUserAnswer)
+                                            <i class="bi bi-x-circle-fill"></i>
                                         @endif
                                     </div>
 
                                     <div class="option-content">
                                         <p class="option-text">{{ $value }}</p>
 
-                                        {{-- ✅ Always show Correct Answer --}}
                                         @if ($isCorrect)
                                             <span class="status-badge correct-badge">
                                                 Correct Answer
                                             </span>
                                         @endif
 
-                                        {{-- ❌ Show Your Answer only if wrong --}}
-                                        @if ($isWrong)
-                                            <span class="status-badge incorrect-badge">
+                                        @if ($isUserAnswer)
+                                            <span
+                                                class="status-badge {{ $isCorrect ? 'correct-badge' : 'incorrect-badge' }}">
                                                 Your Answer
                                             </span>
                                         @endif
-
                                     </div>
-
                                 </div>
                             @endforeach
 
@@ -417,6 +409,11 @@
                 @endforeach
 
 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="{{ url('/') }}" class="btn btn-success"><i class="bi bi-house"></i> Back to home</a>
             </div>
         </div>
 
@@ -529,4 +526,3 @@
 @section('script')
 
 @endsection
-    

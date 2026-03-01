@@ -15,13 +15,17 @@ class TestUploadController extends Controller
     {
 
         $users = User::where('role', '!=', 'Admin')->get();
-         $free_quiz_list = DB::table('free_test_master as a')
+        $free_quiz_list = DB::table('free_test_master as a')
             ->join('quiz_categories as b', 'a.test_category', '=', 'b.id')
             ->select('a.id', 'a.test_name', 'b.category_name', 'b.id as category_id', 'a.id as test_id')
             ->get();
+
         $categories = QuizCategory::join('quiz_category_master', 'quiz_category_master.id', '=', 'quiz_categories.category_code')
             ->select('quiz_categories.*', 'quiz_category_master.*')
             ->get();
+
+        // $categories = QuizCategory::where('status', 1)->get();
+
         //  dd($category);
         return view('Admin.test_upload.free_quiz_index', compact('users', 'categories', 'free_quiz_list'));
     }
@@ -107,16 +111,19 @@ class TestUploadController extends Controller
             ->join('quiz_categories as b', 'a.test_category', '=', 'b.id')
             ->select('a.id', 'a.test_name', 'b.category_name', 'b.id as category_id', 'a.id as test_id')
             ->get();
-        $categories = QuizCategory::join('quiz_category_master', 'quiz_category_master.id', '=', 'quiz_categories.category_code')
-            ->select('quiz_categories.*', 'quiz_category_master.*')
-            ->get();
+        // $categories = QuizCategory::join('quiz_category_master', 'quiz_category_master.id', '=', 'quiz_categories.category_code')
+        //     ->select('quiz_categories.*', 'quiz_category_master.*')
+        //     ->get();
+        $categories = QuizCategory::where('status', 1)->get();
+
         return view('Admin.test_upload.free_quiz', compact('users', 'free_quiz_list', 'categories'));
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
-            'test_name'  => 'required|string|max:255',
-            'url_name'      => 'required|string|max:255|alpha_dash|unique:tests,url_name',
+            'test_name'  => 'required|string|max:255|unique:free_test_master,test_name',
+            'url_name'      => 'required|string|max:255|alpha_dash|unique:free_test_master,url_name',
             'test_category' => 'required|exists:quiz_categories,id',
             'token'          => 'required|integer|min:1',
 
@@ -130,6 +137,6 @@ class TestUploadController extends Controller
             'test_category' => $request->test_category,
             'number_of_token' => $request->token,
         ]);
-        return redirect()->route('upload.free-quiz')->with('success', 'Record successfully created');
+        return redirect()->route('upload.free-quiz.index')->with('success', 'Record successfully created');
     }
 }

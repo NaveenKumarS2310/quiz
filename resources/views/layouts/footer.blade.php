@@ -15,15 +15,15 @@
         <div class="item_link">
             <a href="{{ url('quiz') }}" class="btn btn_navLink">
                 <div class="icon_current">
-                    <i class="tio-pen"></i>
+                    <i class="tio-clock"></i>
                 </div>
                 <div class="icon_active">
-                    <i class="tio-pen" style="color: var(--bg-primary);"></i>
+                    <i class="tio-clock" style="color: var(--bg-primary);"></i>
                 </div>
-                <div class="txt__tile">TNPSC</div>
+                <div class="txt__tile">Quiz</div>
             </a>
         </div>
-        @if (auth()->check() && (auth()->user()->role == 'Admin' || auth()->user()->role == 'Editor'))
+        {{-- @if (auth()->check() && (auth()->user()->role == 'Admin' || auth()->user()->role == 'Editor'))
         <div class="item_link">
             <a href="#" class="btn btn_navLink">
                 <button type="button" class="btn btnCircle_default _lg" data-toggle="modal"
@@ -32,19 +32,9 @@
                 </button>
             </a>
         </div>
-        @endif
+        @endif --}}
 
-        <div class="item_link">
-            <a href="#" class="btn btn_navLink">
-                <div class="icon_current">
-                    <i class="tio-share"></i>
-                </div>
-                <div class="icon_active">
-                    <i class="tio-share" style="color: var(--bg-primary);"></i>
-                </div>
-                <div class="txt__tile">Ask QA</div>
-            </a>
-        </div>
+
         <div class="item_link">
             <a href="#" class="btn btn_navLink">
                 <div class="icon_current">
@@ -56,18 +46,30 @@
                 <div class="txt__tile">Notes</div>
             </a>
         </div>
-        
         <div class="item_link">
-            <a href="{{ url('profile') }}" class="btn btn_navLink">
+            <a href="#" class="btn btn_navLink">
                 <div class="icon_current">
-                    <i class="tio-user_outlined"></i>
+                    <i class="tio-share"></i>
                 </div>
                 <div class="icon_active">
-                    <i class="tio-user_outlined" style="color: var(--bg-primary);"></i>
+                    <i class="tio-share" style="color: var(--bg-primary);"></i>
                 </div>
-                <div class="txt__tile">Profile</div>
+                <div class="txt__tile">Ask QA</div>
             </a>
         </div>
+        @if (auth()->check() && (auth()->user()->role == 'Admin' || auth()->user()->role == 'Editor'))
+            <div class="item_link">
+                <a href="{{ url('profile') }}" class="btn btn_navLink">
+                    <div class="icon_current">
+                        <i class="tio-user_outlined"></i>
+                    </div>
+                    <div class="icon_active">
+                        <i class="tio-user_outlined" style="color: var(--bg-primary);"></i>
+                    </div>
+                    <div class="txt__tile">Profile</div>
+                </a>
+            </div>
+        @endif
     </div>
 </footer>
 <!-- End. em_main_footer -->

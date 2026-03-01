@@ -21,20 +21,16 @@ class UploadsController extends Controller
 
         $categories  = JobCategory::all();
 
-        $articles = JobUpload::orderBy('created_at', 'desc')->paginate(6);
+        $articles = JobUpload::orderBy('created_at', 'desc')->get();
 
-        $page = (int) $request->get('page', 1);
 
-        if ($page < 1 || $page > $articles->lastPage()) {
-            return redirect()->route('admin.job.upload.create.index', ['page' => 1]);
-        }
 
 
         if (Route::currentRouteName() === "admin.job.upload.edit.index") {
             $articleId = $_GET['id'];
             $article =  JobUpload::where('id', $articleId)->first();
             if (!$article) {
-                return redirect()->route('admin.job.upload.create.index', ['page' => 1]);
+                return redirect()->route('admin.job.upload.create.index');
             }
         } else {
             $article = "";
@@ -98,20 +94,14 @@ class UploadsController extends Controller
 
         $categories  = NewsCategory::all();
 
-        $articles = NewsUpload::orderBy('created_at', 'desc')->paginate(6);
-
-        $page = (int) $request->get('page', 1);
-
-        if ($page < 1 || $page > $articles->lastPage()) {
-            return redirect()->route('admin.news.upload.create.index', ['page' => 1]);
-        }
+        $articles = NewsUpload::orderBy('created_at', 'desc')->get();
 
 
         if (Route::currentRouteName() === "admin.news.upload.edit.index") {
             $articleId = $_GET['id'];
             $article =  NewsUpload::where('id', $articleId)->first();
             if (!$article) {
-                return redirect()->route('admin.news.upload.create.index', ['page' => 1]);
+                return redirect()->route('admin.news.upload.create.index');
             }
         } else {
             $article = "";
@@ -176,20 +166,15 @@ class UploadsController extends Controller
 
         $categories  = NotesCategory::all();
 
-        $articles = NotesUpload::orderBy('created_at', 'desc')->paginate(6);
+        $articles = NotesUpload::orderBy('created_at', 'desc')->get();
 
-        $page = (int) $request->get('page', 1);
-
-        if ($page < 1 || $page > $articles->lastPage()) {
-            return redirect()->route('admin.notes.upload.create.index', ['page' => 1]);
-        }
 
 
         if (Route::currentRouteName() === "admin.notes.upload.edit.index") {
             $articleId = $_GET['id'];
             $article =  NotesUpload::where('id', $articleId)->first();
             if (!$article) {
-                return redirect()->route('admin.notes.upload.create.index', ['page' => 1]);
+                return redirect()->route('admin.notes.upload.create.index');
             }
         } else {
             $article = "";
@@ -254,20 +239,16 @@ class UploadsController extends Controller
 
         $categories  = DocumentCategory::all();
 
-        $articles = DocumentUpload::orderBy('created_at', 'desc')->paginate(6);
+        $articles = DocumentUpload::orderBy('created_at', 'desc')->get();
 
-        $page = (int) $request->get('page', 1);
 
-        if ($page < 1 || $page > $articles->lastPage()) {
-            return redirect()->route('admin.document.upload.create.index', ['page' => 1]);
-        }
 
 
         if (Route::currentRouteName() === "admin.document.upload.edit.index") {
             $articleId = $_GET['id'];
             $article =  DocumentUpload::where('id', $articleId)->first();
             if (!$article) {
-                return redirect()->route('admin.document.upload.create.index', ['page' => 1]);
+                return redirect()->route('admin.document.upload.create.index');
             }
         } else {
             $article = "";
