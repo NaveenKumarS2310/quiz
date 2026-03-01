@@ -20,7 +20,7 @@
                     <i class="mdi mdi-format-align-left"></i>
                 </span> Free Quiz List
             </h3>
-            <a href="{{ route('upload.free-quiz.index') }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('upload.free-quiz') }}" class="btn btn-primary btn-sm">
                 Add New Test
             </a>
         </div>

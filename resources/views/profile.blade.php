@@ -512,11 +512,12 @@
     <section class=" emPage___profile with__background">
         <div class="emPersonal__data">
             <div class="name">
-                <h2>{{ $user->name }}</h2>
+                <h2>{{ ucwords($user->name) }}</h2>
                 <p>{{ $user->email }}</p>
             </div>
             <div class="photo_persona">
-                <img src="{{ url('user-image.png') }}" alt="">
+                {{-- <img src="{{ url('user-image.png') }}" alt=""> --}}
+                <div class="user-avatar me-3">{{ strtoupper(auth()->user()->name[0]) }}</div>
             </div>
         </div>
 
@@ -840,7 +841,7 @@
                 <!-- Stats Cards -->
                 <div class="stats-section">
                     <div class="row">
-                        <div class="col-6">
+                        {{-- <div class="col-6">
                             <div class="stat-card stat-card-scores">
                                 <div class="stat-icon">
                                     <i class="bi bi-graph-up"></i>
@@ -850,11 +851,11 @@
                                     <div class="stat-label">Your Scores</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-6" style="border-left: 1px solid #ccc;">
+                        </div> --}}
+                        <div class="col-12">
                             <div class="stat-card stat-card-tokens">
                                 <div class="stat-icon">
-                                    <i class="bi bi-coin"></i>
+                                    <i class="bi bi-gem"></i>
                                 </div>
                                 <div class="stat-content">
                                     <div class="stat-value">{{ $user->my_tokens }}</div>
@@ -873,7 +874,7 @@
                 <!-- Menu Items -->
                 <div class="menu-section">
                     <!-- My Account -->
-                    <a href="#" class="menu-item">
+                    {{-- <a href="#" class="menu-item">
                         <div class="menu-icon">
                             <i class="bi bi-person"></i>
                         </div>
@@ -884,10 +885,10 @@
                         <div class="menu-chevron">
                             <i class="bi bi-chevron-right"></i>
                         </div>
-                    </a>
+                    </a> --}}
 
                     <!-- My Orders -->
-                    <a href="#" class="menu-item">
+                    {{-- <a href="#" class="menu-item">
                         <div class="menu-icon">
                             <i class="bi bi-box-seam"></i>
                         </div>
@@ -898,10 +899,10 @@
                         <div class="menu-chevron">
                             <i class="bi bi-chevron-right"></i>
                         </div>
-                    </a>
+                    </a> --}}
 
                     <!-- Payment Method -->
-                    <a href="#" class="menu-item">
+                    {{-- <a href="#" class="menu-item">
                         <div class="menu-icon">
                             <i class="bi bi-credit-card"></i>
                         </div>
@@ -912,10 +913,10 @@
                         <div class="menu-chevron">
                             <i class="bi bi-chevron-right"></i>
                         </div>
-                    </a>
+                    </a> --}}
 
                     <!-- Shipping Address -->
-                    <a href="#" class="menu-item">
+                    {{-- <a href="#" class="menu-item">
                         <div class="menu-icon">
                             <i class="bi bi-geo-alt"></i>
                         </div>
@@ -926,10 +927,10 @@
                         <div class="menu-chevron">
                             <i class="bi bi-chevron-right"></i>
                         </div>
-                    </a>
+                    </a> --}}
 
                     <!-- Wishlist -->
-                    <a href="#" class="menu-item">
+                    {{-- <a href="#" class="menu-item">
                         <div class="menu-icon">
                             <i class="bi bi-bookmark"></i>
                         </div>
@@ -941,10 +942,10 @@
                         <div class="menu-chevron">
                             <i class="bi bi-chevron-right"></i>
                         </div>
-                    </a>
+                    </a> --}}
 
                     <!-- Notification -->
-                    <a href="#" class="menu-item">
+                    {{-- <a href="#" class="menu-item">
                         <div class="menu-icon">
                             <i class="bi bi-bell"></i>
                         </div>
@@ -955,7 +956,7 @@
                         <div class="menu-chevron">
                             <i class="bi bi-chevron-right"></i>
                         </div>
-                    </a>
+                    </a> --}}
                 </div>
             </div>
         </div>
@@ -966,25 +967,25 @@
     <!-- <section class="emPage__public padding-t-70">
 
 
-                <div class="profile profile-card">
-                    <img src="/user-icon.png" alt="">
-                    <h1 class="card-title">{{ $user->name }}</h1>
-                    <p><strong>Email:</strong> {{ $user->email }}</p>
-                    <button class="btn-follow">FOLLOW</button>
+                                                    <div class="profile profile-card">
+                                                        <img src="/user-icon.png" alt="">
+                                                        <h1 class="card-title">{{ $user->name }}</h1>
+                                                        <p><strong>Email:</strong> {{ $user->email }}</p>
+                                                        <button class="btn-follow">FOLLOW</button>
 
-                    <div class="sidebar">
-                        <a href="#"><i class="fa fa-home"></i> Overview</a>
-                        <a href="#"><i class="fa fa-cog"></i> Account Settings</a>
-                        <a href="#"><i class="fa fa-tasks"></i> Tasks</a>
-                        <a href="#"><i class="fa fa-question-circle"></i> Help</a>
-                    </div>
-                </div>
+                                                        <div class="sidebar">
+                                                            <a href="#"><i class="fa fa-home"></i> Overview</a>
+                                                            <a href="#"><i class="fa fa-cog"></i> Account Settings</a>
+                                                            <a href="#"><i class="fa fa-tasks"></i> Tasks</a>
+                                                            <a href="#"><i class="fa fa-question-circle"></i> Help</a>
+                                                        </div>
+                                                    </div>
 
 
 
-                <br>
-                <br>
-                <br>
+                                                    <br>
+                                                    <br>
+                                                    <br>
 
-            </section> -->
+                                                </section> -->
 @endsection

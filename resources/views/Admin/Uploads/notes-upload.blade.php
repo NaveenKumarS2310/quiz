@@ -40,10 +40,14 @@
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                     <i class="mdi mdi-home"></i>
-                </span> Notes Upload - @if(request()->route()->getName() == 'admin.notes.upload.edit.index') Update @else Create @endif
+                </span> Notes Upload - @if (request()->route()->getName() == 'admin.notes.upload.edit.index')
+                    Update
+                @else
+                    Create
+                @endif
             </h3>
 
-            
+
             <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">
@@ -122,7 +126,7 @@
             </div>
         </div>
         {{-- ================= Notes LIST ================= --}}
-        <div class="row mt-4 notes-list">
+        {{-- <div class="row mt-4 notes-list">
             <div class="col-12 mb-3">
                 <h4 class="card-title">Notes List</h4>
                 <h4 class="card-title float-end">Total Notes : {{ $articles->total() }}</h4>
@@ -135,8 +139,7 @@
                         <div class="card-body">
                             <h5 class="mb-2">{{ $article->title }}</h5>
                             <div class="content-preview text-muted">
-                                {{-- {!! Str::limit(strip_tags($article->content), 200) !!} --}}
-                                {{-- {!! $article->content !!} --}}
+                                
                                 {!! Str::limit(strip_tags($article->content, '<img><br>'), 500) !!}
                             </div>
                         </div>
@@ -165,7 +168,6 @@
                     </div>
                 </div>
 
-                {{-- Preview Modal --}}
                 <div class="modal fade" id="previewModal-{{ $article->id }}" tabindex="-1">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -192,6 +194,70 @@
             </div>
 
             @endif
+        </div> --}}
+        <div class="row">
+
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Job Category</h4>
+                        <div class="table-responsive"></div>
+                        <table id="categoryTable" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($articles as $article)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+
+                                        <td>{{ $article->title }}</td>
+                                        <td class="text-center">
+                                            <label class="switch">
+                                                <input type="checkbox" onclick="category_update(event,this)"
+                                                    class="toggle-status" data-id="{{ $article->id }}"
+                                                    data-name="{{ $article->title }}"
+                                                    {{ $article->status ? 'checked' : '' }}>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-sm btn-outline-primary" data-toggle="modal"
+                                                data-target="#previewModal-{{ $article->id }}">
+                                                Preview
+                                            </button>
+                                            <a href="{{ route('admin.notes.upload.edit.index', ['id' => $article->id, 'page' => isset($_GET['page']) ? $_GET['page'] : 1]) }}"
+                                                class="btn btn-sm btn-outline-success">
+                                                Edit
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <div class="modal fade" id="previewModal-{{ $article->id }}" tabindex="-1">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">{{ $article->title }}</h5>
+                                                    <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {!! $article->content !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 

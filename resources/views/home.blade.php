@@ -196,13 +196,28 @@
     <section class="emPage__public padding-t-70">
 
         <!-- Start em_swiper_products -->
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <div class="em_swiper_products emCoureses__grid margin-b-20">
             <div class="em_bodyCarousel padding-l-20 padding-r-20">
-                <div class="welcome">
-                    <p class="greeting">Good Afternoon 👋</p>
+                <div class="welcome mb-2">
+                    @php
+                        $hour = date('H');
+                        if ($hour < 12) {
+                            $greeting = 'Good Morning 👋';
+                        } elseif ($hour < 18) {
+                            $greeting = 'Good Afternoon 👋';
+                        } else {
+                            $greeting = 'Good Evening 👋';
+                        }
+                    @endphp
+                    <p class="greeting">{{ $greeting }}</p>
                     <h2 class="title">Ready to Quiz?</h2>
-                    <div class="coins">🔥 7</div>
+                    <div class="coins"><i class="bi bi-gem"></i> {{ auth()->user()->my_tokens ?? 0 }}</div>
                 </div>
                 <div class="em_itemCourse_grid w-100">
                     <div class="cardd">
@@ -218,7 +233,7 @@
                                         <span>Join our Telegram Group</span>
                                     </button></a>
                             </center> --}}
-                            <a href="https://t.me/quizunivers">
+                            <a class="text-decoration-none" href="https://t.me/quizunivers">
                                 <div class="community-banner">
                                     <div class="banner-icon"><i class="bi bi-telegram"></i></div>
                                     <div class="banner-content">
@@ -246,18 +261,20 @@
 
                                 <button id="collectTokenBtn"
                                     class="btn btn-success {{ $collectedToday ? 'disabled' : '' }}">
-                                    🎁 Collect {{ $token->token_limit ?? 20 }} Daily Tokens
+                                    🎁 Collect {{ $token->token_limit ?? 20 }} Daily Gems💎
                                 </button>
 
-                                <p class="mt-2 mb-0">
+                                {{-- <p class="mt-2 mb-0">
                                     Your Tokens:
                                     <strong id="tokenCount">{{ auth()->user()->my_tokens ?? 0 }}</strong>
-                                </p>
+                                </p> --}}
 
                                 @if ($collectedToday)
-                                    <small class="text-muted">
-                                        You already collected today. Come back tomorrow!
-                                    </small>
+                                    <p>
+                                        <small class="text-muted">
+                                            You already collected today. Come back tomorrow!
+                                        </small>
+                                    </p>
                                 @endif
 
                             @endif
@@ -292,6 +309,10 @@
 
         <!-- Start em__pkLink -->
 
+        <div class="emTitle_co padding-5 padding-l-20">
+            <h2 class="size-16 weight-500 color-primary mb-1">Latest Free Quiz</h2>
+        </div>
+
         @foreach ($latest_quiz as $index => $lq)
             @if ($index == 10 || $index == 20 || $index == 30)
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3729413945402608"
@@ -317,13 +338,110 @@
             </div> --}}
                 <div class="quiz-list">
                     <!-- Quiz Item 1 -->
-                    <a href="{{ url('quiz') }}/{{ $lq->slug }}">
+                    <a class="text-decoration-none" href="{{ url('quiz') }}/quiz_exam/{{ $lq->id }}">
                         <div class="quiz-item">
                             <div class="quiz-content">
-                                <h4 class="quiz-title">{{ $index + 1 }}. {{ $lq->name }}</h4>
-                                <div class="quiz-meta">
-                                    <span class="meta-item">⏱️ {{ $lq->noq }} Qs</span>
-                                    <span class="meta-item">⏰ {{ $lq->noq }}mins</span>
+                                <h4 class="quiz-title">{{ $index + 1 }}. {{ $lq->test_name }}</h4>
+                                @php
+                                    $questions = DB::table('free_test_question')->where('test_id', $lq->id)->count();
+                                    $totalQuestions = $questions;
+                                    $timePerQuestionSeconds = 60;
+
+                                    $totalTimeMinutes = ceil(($totalQuestions * $timePerQuestionSeconds) / 60);
+                                @endphp
+                                <div
+                                    class="quiz-meta d-flex align-items-center justify-content-around text-decoration-none">
+                                    <span class="meta-item text-warning"><i class="bi bi-question-circle "></i>
+                                        {{ $questions }}
+                                        Qs</span>
+                                    <span class="meta-item text-danger"><i class="bi bi-alarm "></i>
+                                        {{ $totalTimeMinutes }}mins</span>
+                                    <span class="meta-item text-primary"><i class="bi bi-gem "></i>
+                                        {{ $lq->number_of_token }}</span>
+                                </div>
+                            </div>
+                            <button class="play-btn">▶</button>
+                        </div>
+                    </a>
+                </div>
+            </section>
+            {{-- <div class="card m-2">
+                <div class="card-body">
+                    <a href="{{ url('quiz') }}/{{ $lq->slug }}" class="item-link">
+                        <div class="group">
+                            <span class="path__name">{{ $index + 1 }}. {{ $lq->name }}</span>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-7">
+                                <label style="color: var(--bg-primary)">Number Of Qustion : {{$lq->noq}}</label>
+                            </div>
+                            <div class="col-5">
+                                <label style="color: var(--bg-primary)">Time : <i class="tio-alarm"></i> {{$lq->noq}}mins</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-primary" style="display: flex;">
+                                    <div class="icon">
+                                        <i class="tio-next_ui" style="color: #fff;"></i>
+                                    </div>
+                                    <span>&nbsp;&nbsp;Start Now</span>
+                                </button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div> --}}
+        @endforeach
+        <div class="emTitle_co padding-5 padding-l-20">
+            <h2 class="size-16 weight-500 color-primary mb-1">Latest Interview Quiz</h2>
+        </div>
+
+        @foreach ($latest_interview_quiz as $index => $lq)
+            @if ($index == 10 || $index == 20 || $index == 30)
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3729413945402608"
+                    crossorigin="anonymous"></script>
+                <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                    data-ad-format="fluid" data-ad-client="ca-pub-3729413945402608" data-ad-slot="3898015154"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || [])
+                    .push({});
+                </script>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3729413945402608"
+                    crossorigin="anonymous"></script>
+                <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                    data-ad-format="fluid" data-ad-client="ca-pub-3729413945402608" data-ad-slot="6200227944"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            @endif
+            <section class="quizzes-section m-2 mb-3">
+                {{-- <div class="section-header">
+                <h3 class="section-title">:dart: Latest Quizzes</h3>
+                <a href="#" class="see-all">See all ›</a>
+            </div> --}}
+                <div class="quiz-list">
+                    <!-- Quiz Item 1 -->
+                    <a class="text-decoration-none" href="{{ url('quiz') }}/interview/{{ $lq->id }}">
+                        <div class="quiz-item">
+                            <div class="quiz-content">
+                                <h4 class="quiz-title">{{ $index + 1 }}. {{ $lq->test_name }}</h4>
+                                @php
+                                    $questions = DB::table('free_test_question')->where('test_id', $lq->id)->count();
+                                    $totalQuestions = $questions;
+                                    $timePerQuestionSeconds = 60;
+
+                                    $totalTimeMinutes = ceil(($totalQuestions * $timePerQuestionSeconds) / 60);
+                                @endphp
+                                <div
+                                    class="quiz-meta d-flex align-items-center justify-content-around text-decoration-none">
+                                    <span class="meta-item text-warning"><i class="bi bi-question-circle "></i>
+                                        {{ $questions }}
+                                        Qs</span>
+                                    <span class="meta-item text-danger"><i class="bi bi-alarm "></i>
+                                        {{ $totalTimeMinutes }}mins</span>
+                                    <span class="meta-item text-primary"><i class="bi bi-gem "></i>
+                                        {{ $lq->number_of_token }}</span>
                                 </div>
                             </div>
                             <button class="play-btn">▶</button>

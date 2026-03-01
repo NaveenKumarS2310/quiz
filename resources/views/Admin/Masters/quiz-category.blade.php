@@ -30,66 +30,86 @@
                     <div class="card-body">
                         <h4 class="card-title">Quiz Category</h4>
                         <p class="card-description"> create Or update </p>
-                        
-                        @if(request()->route()->getName() == "admin.quiz.category.edit.index")
-                        <form class="forms-sample" action="{{ route('admin.quiz.category.edit.store') }}" method="POST">
-                         @else
-                         <form class="forms-sample" action="{{ route('admin.quiz.category.create.store') }}" method="POST">
-                         @endif
-                            @csrf
-                            <input type="hidden" name="id" value="{{ isset($_GET['id']) }}">
-                            <div class="row form-group">
-                                <label>Category <span class="text-danger">*</span></label>
-                                @foreach ($master_categories as $c)
-                                    <div class="col-md-4">
-                                        <div class="form-check form-check-flat form-check-primary">
-                                            <label class="form-check-label">
-                                                <input type="radio" name="category" value="{{ $c->id }}"
-                                                    class="form-check-input"
-                                                    {{ old('category', $category->category_code ?? '') == $c->id ? 'checked' : '' }}>
-                                                {{ $c->name }}
-                                                <i class="input-helper"></i>
-                                            </label>
-                                        </div>
+
+                        @if (request()->route()->getName() == 'admin.quiz.category.edit.index')
+                            <form class="forms-sample" action="{{ route('admin.quiz.category.edit.store') }}" method="POST"
+                                enctype="multipart/form-data">
+                            @else
+                                <form class="forms-sample" action="{{ route('admin.quiz.category.create.store') }}"
+                                    method="POST" enctype="multipart/form-data">
+                        @endif
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $_GET['id'] ?? '' }}">
+                        <div class="row form-group">
+                            <label>Category <span class="text-danger">*</span></label>
+                            @foreach ($master_categories as $c)
+                                <div class="col-md-4">
+                                    <div class="form-check form-check-flat form-check-primary">
+                                        <label class="form-check-label">
+                                            <input type="radio" name="category" value="{{ $c->id }}"
+                                                class="form-check-input"
+                                                {{ old('category', $category->category_code ?? '') == $c->id ? 'checked' : '' }}>
+                                            {{ $c->name }}
+                                            <i class="input-helper"></i>
+                                        </label>
                                     </div>
-                                @endforeach
+                                </div>
+                            @endforeach
 
 
-                            </div>
-                            <div class="form-group">
-                                <label for="category-name">Category Name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="category_name" id="category-name"
-                                    placeholder="Enter your category name"
-                                    value="{{ old('category_name', $category->category_name ?? '') }}">
-                            </div>
-                            <div class="form-check form-check-flat form-check-primary">
-                                <label class="form-check-label">
-                                    <input type="checkbox" name="category_status" value="1" class="form-check-input"
-                                        {{ old('category_status', $category->status ?? 0) ? 'checked' : '' }}>
-                                    Status
-                                    <i class="input-helper"></i>
-                                </label>
-                            </div>
-
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul class="mb-0">
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
+                        </div>
+                        <div class="form-group">
+                            <label for="category-name">Category Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="category_name" id="category-name"
+                                placeholder="Enter your category name"
+                                value="{{ old('category_name', $category->category_name ?? '') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="category-image">Category Image</label>
+                            <input type="file" class="form-control" name="category_image" id="category-image">
+                            @if (isset($category->category_image) && $category->category_image)
+                                <div class="mt-2 text-center">
+                                    <img src="{{ asset('images/categories/' . $category->category_image) }}"
+                                        alt="Current Image" style="max-width: 150px; border: 1px solid #ddd; padding: 5px;">
+                                    <div class="form-check form-check-flat form-check-danger mt-1 d-inline-block">
+                                        <label class="form-check-label text-danger">
+                                            <input type="checkbox" name="remove_image" value="1"
+                                                class="form-check-input">
+                                            Remove Image
+                                            <i class="input-helper"></i>
+                                        </label>
+                                    </div>
                                 </div>
                             @endif
+                        </div>
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input type="checkbox" name="category_status" value="1" class="form-check-input"
+                                    {{ old('category_status', $category->status ?? 0) ? 'checked' : '' }}>
+                                Status
+                                <i class="input-helper"></i>
+                            </label>
+                        </div>
 
-                            @if (session()->has('success'))
-                                <div class="alert alert-success">
-                                      {{ session()->get('success') }} 
-                                </div>
-                            @endif
-                            <div class="mt-2 text-end">
-                                <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
-                                {{-- <button class="btn btn-light">Cancel</button> --}}
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
+                        @endif
+
+                        @if (session()->has('success'))
+                            <div class="alert alert-success">
+                                {{ session()->get('success') }}
+                            </div>
+                        @endif
+                        <div class="mt-2 text-end">
+                            <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                            {{-- <button class="btn btn-light">Cancel</button> --}}
+                        </div>
 
                         </form>
                     </div>
@@ -108,6 +128,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Image</th>
                                     <th>Category</th>
                                     <th>Name</th>
                                     <th>Status</th>
@@ -118,17 +139,30 @@
                                 @foreach ($categories as $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            @if ($data->category_image)
+                                                <img src="{{ asset('images/categories/' . $data->category_image) }}"
+                                                    alt="Image"
+                                                    style="width: 50px; height: 50px; border-radius: 5px; object-fit: cover;">
+                                            @else
+                                                <span class="text-muted">No Image</span>
+                                            @endif
+                                        </td>
                                         <td> <span class="badge badge-primary ">{{ $data->name }}</span></td>
                                         <td>{{ $data->category_name }}</td>
                                         <td class="text-center">
                                             <label class="switch">
-                                                <input type="checkbox" onclick="category_update(event,this)" class="toggle-status" data-id="{{ $data->record_id }}" data-name="{{ $data->category_name }}"
+                                                <input type="checkbox" onclick="category_update(event,this)"
+                                                    class="toggle-status" data-id="{{ $data->record_id }}"
+                                                    data-name="{{ $data->category_name }}"
                                                     {{ $data->status ? 'checked' : '' }}>
                                                 <span class="slider round"></span>
                                             </label>
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{ route('admin.quiz.category.edit.index',['id' => $data->record_id]) }}"><button type="button" class="btn btn-gradient-info btn-fw">Edit</button></a>
+                                            <a
+                                                href="{{ route('admin.quiz.category.edit.index', ['id' => $data->record_id]) }}"><button
+                                                    type="button" class="btn btn-gradient-info btn-fw">Edit</button></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -156,47 +190,47 @@
             });
         });
 
-        function category_update(ev,el){
-
-           
-           ev.stopPropagation();      // 1️⃣ stop parent events
-    ev.preventDefault();       // 2️⃣ stop default toggle
-
-         if(el.checked){
-
-          var status = 1;
-
-          var stat = "Activated";
+        function category_update(ev, el) {
 
 
-         }else{
-          var status = 0;
+            ev.stopPropagation(); // 1️⃣ stop parent events
+            ev.preventDefault(); // 2️⃣ stop default toggle
 
-          var stat = "Deactivated";
+            if (el.checked) {
+
+                var status = 1;
+
+                var stat = "Activated";
 
 
-         }
+            } else {
+                var status = 0;
 
-         
+                var stat = "Deactivated";
 
-         Swal.fire({
+
+            }
+
+
+
+            Swal.fire({
                 title: 'Are you sure?',
-                text: 'Change the status of the "' + el.getAttribute('data-name') + '" category to '+ stat +'?',
+                text: 'Change the status of the "' + el.getAttribute('data-name') + '" category to ' + stat + '?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes, change it'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    categoryChangeConfirmed(el.getAttribute('data-id'), status,el);
+                    categoryChangeConfirmed(el.getAttribute('data-id'), status, el);
                 }
             });
 
 
         }
 
-        function categoryChangeConfirmed(id,status,el){
+        function categoryChangeConfirmed(id, status, el) {
 
-         $.ajax({
+            $.ajax({
                 url: "{{ route('admin.quiz.category.status.update') }}",
                 type: "POST",
                 data: {
@@ -214,13 +248,13 @@
                             showConfirmButton: false
                         });
 
-                        if(response.data ==0){
-                         el.checked = false;
-                        }else{
-                         el.checked = true;
+                        if (response.data == 0) {
+                            el.checked = false;
+                        } else {
+                            el.checked = true;
                         }
 
-                        
+
 
                         setTimeout(() => location.reload(), 1600);
                     }
