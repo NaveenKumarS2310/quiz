@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\QuizCategory;
 use App\Models\QuizList;
 use App\Models\QuizListQustion;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use App\Models\{JobCategory, DocumentCategory, NotesCategory, NewsCategory};
+use App\Models\{JobUpload, DocumentUpload, NewsUpload, NotesUpload};
 
 class QuizController extends Controller
 {
@@ -57,7 +59,6 @@ class QuizController extends Controller
         }
         return view('quiz_overview', compact('quiz', 'type'));
     }
-
     public function quiz_start($type, $id)
     {
         // $quiz = QuizList::find($quiz_id);
@@ -99,7 +100,6 @@ class QuizController extends Controller
 
         return redirect(url('quiz/' . $type . '/' . $id . '/' . '1'));
     }
-
     public function qustion_view($type, $id, $qust_no)
     {
         if ($type == 'quiz_exam') {
@@ -118,20 +118,6 @@ class QuizController extends Controller
 
         return view('qustion_view', compact('quiz', 'qustions', 'type'));
     }
-
-    // public function single_qustion_submit($slug, Request $request)
-    // {
-    //     $answer_list = [];
-    //     if ($request->session()->has('answer_list')) {
-    //         $answer_list = session('answer_list');
-    //     }
-    //     $answer_list[$request->qustion_id] = $request->answer;
-    //     session(['answer_list' => $answer_list]);
-
-    //     $return_url = url('quiz') . "/" . $slug . "/" . ($request->index_value + 1);
-    //     return redirect($return_url);
-    // }
-
     public function quiz_result(Request $request)
     {
         // dd($request->all());
@@ -154,7 +140,6 @@ class QuizController extends Controller
 
         return view('quiz_result', compact('answers', 'quiz', 'qustions', 'type'));
     }
-
     public function quiz_submit(Request $request)
     {
         $answer_list = [];
@@ -175,13 +160,52 @@ class QuizController extends Controller
 
         return view('quiz_submit', compact('answer_list', 'quiz', 'qustions', 'type'));
     }
-
     public function profile(Request $request)
     {
         // Retrieve the authenticated user
         $user = Auth::user();
 
-        // Pass the user data to the 'profile' view
+
         return view('profile', compact('user'));
+    }
+    public function latest_notes(Request $request)
+    {
+         $user = Auth::user();
+        $categories  = NotesCategory::all();
+
+        $articles = NotesUpload::orderBy('created_at', 'desc')->paginate(6);
+
+        $page = (int) $request->get('page', 1);
+
+        if ($page < 1 || $page > $articles->lastPage()) {
+            return redirect()->route('admin.notes.upload.create.index', ['page' => 1]);
+        }
+         $article = "";
+        return view('notes', compact('categories', 'articles','article','user'));
+    }
+    public function documents(Request $request)
+    {
+         $user = Auth::user();
+        $categories  = DocumentCategory::all();
+
+
+        $articles = DocumentUpload::latest()->paginate(20);
+
+       
+         $article = "";
+        return view('document', compact('categories', 'articles','article','user'));
+    }
+    public function news(Request $request)
+    {
+         $user = Auth::user();
+        $categories  = NewsCategory::all();
+
+        $articles = NewsUpload::orderBy('created_at', 'desc')->paginate(20);
+
+        $page = (int) $request->get('page', 1);
+
+       
+        $article = "";
+        return view('news', compact('categories', 'articles','article','user'));
     }
 }

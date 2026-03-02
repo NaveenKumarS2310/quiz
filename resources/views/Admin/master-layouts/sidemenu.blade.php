@@ -113,12 +113,12 @@
             </div>
         </li> --}}
 
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="docs/documentation.html" target="_blank">
                 <span class="menu-title">Token Management</span>
                 <i class="mdi mdi-file-document-box menu-icon"></i>
             </a>
-        </li>
+        </li> --}}
 
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">

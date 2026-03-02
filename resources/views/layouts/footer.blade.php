@@ -38,14 +38,16 @@
         <div class="item_link">
             <a href="#" class="btn btn_navLink">
                 <div class="icon_current">
-                    <i class="tio-book_outlined"></i>
+                    <i class="tio-share"></i>
                 </div>
                 <div class="icon_active">
-                    <i class="tio-book_outlined" style="color: var(--bg-primary);"></i>
+                    <i class="tio-share" style="color: var(--bg-primary);"></i>
                 </div>
-                <div class="txt__tile">Notes</div>
+                <div class="txt__tile">Ask QA</div>
             </a>
         </div>
+    
+        
         <div class="item_link">
             <a href="#" class="btn btn_navLink">
                 <div class="icon_current">

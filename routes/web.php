@@ -60,5 +60,7 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 // Route::get('/delete-question/{quiz_id}', [QustionController::class, 'delete_question']);
 
 Route::get('/profile', [QuizController::class, 'profile'])->name('profile.update');
-
+Route::get('/latest_notes', [QuizController::class, 'latest_notes'])->name('latest_notes');
+Route::get('/documents', [QuizController::class, 'documents'])->name('documents');
+Route::get('/news', [QuizController::class, 'news'])->name('news');
 Route::post('/collect-daily-token', [TokenController::class, 'collect'])->name('token.collect');
