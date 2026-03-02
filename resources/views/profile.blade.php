@@ -893,8 +893,8 @@
                             <i class="bi bi-box-seam"></i>
                         </div>
                         <div class="menu-content">
-                            <h3 class="menu-title">My Orders</h3>
-                            <p class="menu-subtitle">Manage your orders</p>
+                            <h3 class="menu-title">My Test</h3>
+                            <p class="menu-subtitle">Manage your Test</p>
                         </div>
                         <div class="menu-chevron">
                             <i class="bi bi-chevron-right"></i>
@@ -907,7 +907,7 @@
                             <i class="bi bi-credit-card"></i>
                         </div>
                         <div class="menu-content">
-                            <h3 class="menu-title">Payment Method</h3>
+                            <h3 class="menu-title">Payment History</h3>
                             <p class="menu-subtitle">Manage payment methods</p>
                         </div>
                         <div class="menu-chevron">
@@ -915,8 +915,8 @@
                         </div>
                     </a> --}}
 
-                    <!-- Shipping Address -->
-                    {{-- <a href="#" class="menu-item">
+                    {{-- <!-- Shipping Address -->
+                    <a href="#" class="menu-item">
                         <div class="menu-icon">
                             <i class="bi bi-geo-alt"></i>
                         </div>

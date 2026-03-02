@@ -76,7 +76,22 @@
                         </a>
                     </li>
 
-
+                    @if (auth()->check() && (auth()->user()->role == 'Admin'))
+                     <li class="nav-item">
+                        <a class="nav-link" href="{{ url('admin/dashboard') }}">
+                            <div class="">
+                                <div class="icon_current">
+                                   <i class="bi bi-person-lines-fill"></i>
+                                    <span class="title_link">Admin Panel</span>
+                                </div>
+                                <div class="icon_active">
+                                   <i class="bi bi-person-lines-fill"></i>
+                                    <span class="title_link">Admin Panel</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    @endif
 
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ url('quiz') }}">
@@ -93,17 +108,49 @@
                         </a>
                     </li> --}}
 
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="{{ url('privacy-policy') }}">
+                      <li class="nav-item">
+                        
+                        <a class="nav-link" href="{{ url('latest_notes') }}">
                             <div class="">
                                 <div class="icon_current">
                                     <i class="tio-book_outlined"></i>
-                                    <span class="title_link">Privacy Policy</span>
+                                    <span class="title_link">Notes</span>
                                 </div>
                                 <div class="icon_active">
                                     <i class="tio-book_outlined"></i>
-                                    <span class="title_link">Privacy Policy</span>
+                                    <span class="title_link">Notes</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="{{ url('documents') }}">
+                            <div class="">
+                                <div class="icon_current">
+                                    <i class="tio-book_outlined"></i>
+                                    <span class="title_link">Document</span>
+                                </div>
+                                <div class="icon_active">
+                                    <i class="tio-book_outlined"></i>
+                                    <span class="title_link">Document</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                     <li class="nav-item">
+                        
+                        <a class="nav-link" href="{{ url('news') }}">
+                            <div class="">
+                                <div class="icon_current">
+                                    <i class="tio-book_outlined"></i>
+                                    <span class="title_link">NEWS</span>
+                                </div>
+                                <div class="icon_active">
+                                    <i class="tio-book_outlined"></i>
+                                    <span class="title_link">NEWS</span>
                                 </div>
                             </div>
                         </a>
@@ -123,12 +170,7 @@
                             </div>
                         </a>
                     </li>
-
-
-
-
                 </ul>
-
             </div>
 
         </div>
