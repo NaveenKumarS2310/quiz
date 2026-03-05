@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+<<<<<<< Updated upstream
 use App\Models\{QuizCategory, QuizCategoryMaster};
 use App\Models\{InterviewCategory, NewsCategory};
 use App\Models\{DocumentCategory, JobCategory};
@@ -405,5 +404,17 @@ class CategoryController extends Controller
         ]);
 
         return response()->json(['status' => 'success', 'data' => $request->status], 200);
+=======
+use App\Models\QuizCategory;
+class CategoryController extends Controller
+{
+    //
+    public function index(){
+    
+        $categories = QuizCategory::where('status',1)->get();
+        return view('category.index');
+    }
+    public function store(Request $request){
+>>>>>>> Stashed changes
     }
 }

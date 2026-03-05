@@ -84,11 +84,7 @@ class QuizController extends Controller
             $quiz_question = DB::table('interview_test_question')->where('test_id', $id)->get();
         }
 
-        if (Auth::check()) {
-            $user = Auth::user();
-            $user->my_tokens = $user->my_tokens - $quiz->number_of_token;
-            $user->save();
-        }
+
 
 
 
@@ -120,11 +116,6 @@ class QuizController extends Controller
     }
     public function quiz_result(Request $request)
     {
-        // dd($request->all());
-        // $answer_list = [];
-        // if ($request->session()->has('answer_list')) {
-        //     $answer_list = session('answer_list');
-        // }
         $type = $request->type;
         if ($type == 'quiz_exam') {
             $quiz = DB::table('free_test_master')->where('id', $request->quiz_id)->first();
@@ -136,9 +127,23 @@ class QuizController extends Controller
         } else {
             $qustions = DB::table('interview_test_question')->where('test_id', $quiz->id)->orderBy('id', "DESC")->get();
         }
-        $answers = $request->answers;
 
-        return view('quiz_result', compact('answers', 'quiz', 'qustions', 'type'));
+        $existingResult = \App\Models\QuizResult::where([
+            'session_id' => session()->getId(),
+            'quiz_id' => $quiz->id,
+            'quiz_type' => $type,
+        ])->first();
+
+        $answers = $request->input('answers', []);
+        if (is_string($answers)) {
+            $answers = json_decode($answers, true) ?? [];
+        }
+
+        if (empty($answers) && $existingResult) {
+            $answers = json_decode($existingResult->answers_json, true) ?? [];
+        }
+
+        return view('quiz_result', compact('answers', 'quiz', 'qustions', 'type', 'existingResult'));
     }
     public function quiz_submit(Request $request)
     {
@@ -157,8 +162,56 @@ class QuizController extends Controller
         } else {
             $qustions = DB::table('interview_test_question')->where('test_id', $quiz->id)->orderBy('id', "DESC")->get();
         }
+        $answers = $request->input('answers', []);
+        if (is_string($answers)) {
+            $answers = json_decode($answers, true) ?? [];
+        }
+        $answer_list = $answers;
 
-        return view('quiz_submit', compact('answer_list', 'quiz', 'qustions', 'type'));
+        $existingResult = \App\Models\QuizResult::where([
+            'session_id' => session()->getId(),
+            'quiz_id' => $quiz->id,
+            'quiz_type' => $type,
+        ])->first();
+
+        // if the result doesn't exist, it means this is the first time they click submit
+        // so we save the answers and update tokens
+        if (!$existingResult) {
+            if (Auth::check()) {
+                $user = Auth::user();
+                $user->my_tokens = $user->my_tokens + $quiz->number_of_token;
+                $user->save();
+            }
+
+            $correct_answer = 0;
+            $not_answered = 0;
+            $wrong_answer = 0;
+
+            foreach ($qustions as $qustion) {
+                $selectedAnswer = $answers[$qustion->id] ?? null;
+                if ($selectedAnswer === null) {
+                    $not_answered++;
+                } elseif ($selectedAnswer === $qustion->correct_answer) {
+                    $correct_answer++;
+                } else {
+                    $wrong_answer++;
+                }
+            }
+
+            \App\Models\QuizResult::create([
+                'session_id' => session()->getId(),
+                'quiz_id' => $quiz->id,
+                'quiz_type' => $type,
+                'user_id' => auth()->id(),
+                'total_questions' => count($qustions),
+                'correct_answers' => $correct_answer,
+                'wrong_answers' => $wrong_answer,
+                'skipped_answers' => $not_answered,
+                'answers_json' => json_encode($answers),
+            ]);
+        }
+
+        return view('quiz_submit', compact('answer_list', 'quiz', 'qustions', 'type'))->render();
     }
     public function profile(Request $request)
     {

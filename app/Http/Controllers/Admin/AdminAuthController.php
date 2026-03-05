@@ -8,6 +8,7 @@ class AdminAuthController extends Controller
     //
     public function login()
     {
+<<<<<<< Updated upstream
 
         if (Auth::check()) {
             // dd('sad',$routeName);
@@ -16,6 +17,8 @@ class AdminAuthController extends Controller
                 return redirect()->route('admin.dashboard');
            
         }
+=======
+>>>>>>> Stashed changes
         return view('Admin.Auth.login');
     }
     public function loginSubmit(Request $request)

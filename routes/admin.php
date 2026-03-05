@@ -18,6 +18,7 @@ Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout
 
 Route::middleware('basic.auth')->group(function () {
 
+<<<<<<< Updated upstream
 
   Route::middleware('check.if.admin.or.editor')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -128,5 +129,17 @@ Route::middleware('basic.auth')->group(function () {
     ///token
     Route::get('/token-manager', [AdminManageController::class, 'token_index'])->name('user.token.index');
     Route::post('/token-limit-update', [AdminManageController::class, 'update_token_limit'])->name('token.limit.update');
+=======
+ Route::get('login', [AdminAuthController::class, 'login'])->name('admin.login');
+
+ Route::post('login-submit', [AdminAuthController::class, 'loginSubmit'])->name('admin.login.submit');
+
+ Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+ Route::middleware('check.if.admin.or.editor')->group(function () {
+  Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+  Route::prefix('masters')->group(function () {
+   Route::get('quiz-category', [CategoryController::class, 'index']);
+>>>>>>> Stashed changes
   });
 });

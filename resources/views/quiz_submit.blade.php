@@ -331,8 +331,8 @@
                 </div>
             </section>
         </div> --}}
-        <div class="row">
-            <div class="col-12 col-lg-8">
+        <div class="row" id="rendered-answers-content">
+            <div class="col-12 col-lg-8 mx-auto">
                 <!-- Question 1 -->
                 @php $qust_no = 1; @endphp
                 @foreach ($qustions as $qustion)
@@ -403,6 +403,14 @@
                                     </div>
                                 </div>
                             @endforeach
+
+                            @if (!empty($qustion->answer_description))
+                                <div class="mt-3 p-3 bg-light rounded border-start border-4 border-info shadow-sm">
+                                    <h6 class="text-info fw-bold mb-1"><i class="bi bi-info-circle me-1"></i> Explanation
+                                    </h6>
+                                    <p class="mb-0 text-secondary">{{ $qustion->answer_description }}</p>
+                                </div>
+                            @endif
 
                         </div>
                     </div>
