@@ -196,13 +196,13 @@
                         </div>
                         <div class="stat-info flex-grow-1">
                             <div class="d-flex justify-content-between">
-                                <span class="fw-medium">Gem Contribution</span>
+                                <span class="fw-medium">Gem Reward</span>
                                 <span class="fw-bold text-warning">
-                                    -{{ $quiz->number_of_token }} Gems
+                                    +{{ $quiz->number_of_token }} Gems
                                 </span>
                             </div>
                             <small class="text-muted">
-                                Gems will be deducted before starting the exam
+                                Gems will be added after completing the exam
                             </small>
                         </div>
                     </div>

@@ -254,7 +254,7 @@
 
 
         <!--<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3729413945402608" -->
-                                                                                                                                                                                                                                                                       <!--      crossorigin="anonymous"></script>-->
+                                                                                                                                                                                                                                                                                                                                       <!--      crossorigin="anonymous"></script>-->
         <!-- <ins class="adsbygoogle"-->
         <!--      style="display:block; text-align:center;"-->
         <!--      data-ad-layout="in-article"-->
@@ -347,37 +347,31 @@
 
 
                 <!-- Stats Grid -->
-                <div class="stats-grid row g-3 mb-5">
-                    <div class="col-6 col-md-3 mb-3">
-                        <div class="stat-item p-3 rounded-5 bg-white border h-100 transition-hover">
-                            <div class="stat-icon-1 bg-primary-subtle text-primary mb-2">
+                <div class="stats-grid row justify-content-center g-3 mb-5">
+                    <div class="col-4 mb-3">
+                        <div
+                            class="stat-item p-2 p-md-3 rounded-4 bg-white border h-100 transition-hover text-center text-md-start">
+                            <div class="stat-icon-1 bg-primary-subtle text-primary mb-2 mx-auto mx-md-0">
                                 <i class="bi bi-list-task"></i>
                             </div>
                             <div class="stat-label">Total</div>
                             <div class="stat-value">{{ count($qustions) }}</div>
                         </div>
                     </div>
-                    <div class="col-6 col-md-3 mb-3">
-                        <div class="stat-item p-3 rounded-4 bg-white border h-100 transition-hover">
-                            <div class="stat-icon-2 bg-success-subtle text-success mb-2">
+                    <div class="col-4 mb-3">
+                        <div
+                            class="stat-item p-2 p-md-3 rounded-4 bg-white border h-100 transition-hover text-center text-md-start">
+                            <div class="stat-icon-2 bg-success-subtle text-success mb-2 mx-auto mx-md-0">
                                 <i class="bi bi-check-circle-fill"></i>
                             </div>
                             <div class="stat-label">Correct</div>
                             <div class="stat-value">{{ $correct_answer }}</div>
                         </div>
                     </div>
-                    {{-- <div class="col-6 col-md-3">
-                        <div class="stat-item p-3 rounded-4 bg-white border h-100 transition-hover">
-                            <div class="stat-icon-3 bg-warning-subtle text-warning mb-2">
-                                <i class="bi bi-dash-circle-fill"></i>
-                            </div>
-                            <div class="stat-label">Skipped</div>
-                            <div class="stat-value">{{ $not_answered }}</div>
-                        </div>
-                    </div> --}}
-                    <div class="col-6 col-md-3">
-                        <div class="stat-item p-3 rounded-4 bg-white border h-100 transition-hover">
-                            <div class="stat-icon-4 bg-danger-subtle text-danger mb-2">
+                    <div class="col-4 mb-3">
+                        <div
+                            class="stat-item p-2 p-md-3 rounded-4 bg-white border h-100 transition-hover text-center text-md-start">
+                            <div class="stat-icon-4 bg-danger-subtle text-danger mb-2 mx-auto mx-md-0">
                                 <i class="bi bi-x-circle-fill"></i>
                             </div>
                             <div class="stat-label">Wrong</div>
@@ -387,18 +381,23 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="d-grid gap-3 justify-content-center">
-                    <form action="{{ url('quiz_submit') }}" method="get">
+                <div class="d-grid gap-3 justify-content-center"
+                    @if (isset($existingResult) && $existingResult) style="display: none !important;" @endif>
+                    <form action="{{ url('quiz_submit') }}" method="get" id="quiz-submit-form">
                         @csrf
                         <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
                         <input type="hidden" name="type" value="{{ $type }}">
-                        <button type="submit"
+                        <input type="hidden" name="answers" value="{{ json_encode($answers) }}">
+                        <button type="submit" id="submit-answers-btn"
                             class="btn btn-success btn-md px-3 py-3 fw-bold rounded-pill shadow-sm view-btn">
-                            <i class="bi bi-check-circle-fill me-2"></i> Submit your answers
+                            <span class="normal-state"><i class="bi bi-check-circle-fill me-2"></i> Submit your
+                                answers</span>
+                            <span class="loading-state d-none">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Processing...
+                            </span>
                         </button>
                     </form>
-
-
                 </div>
             </div>
         </div>
@@ -407,11 +406,14 @@
         <br>
         <br>
 
+        <!-- Ajax Answers Container -->
+        <div id="ajax-answers-container" class="container-fluid mb-5"></div>
+
 
         <div class="em_swiper_products emCoureses__grid margin-b-20">
             <div class="em_bodyCarousel p-2">
                 <div class="em_itemCourse_grid w-100">
-                    <a href="https://t.me/quizunivers">
+                    <a class="text-decoration-none" href="https://t.me/quizunivers">
                         <div class="community-banner">
                             <div class="banner-icon"><i class="bi bi-telegram"></i></div>
                             <div class="banner-content">
@@ -441,5 +443,98 @@
 @endsection
 
 @section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const submitForm = document.getElementById('quiz-submit-form');
 
+            if (submitForm) {
+                const triggerFetch = function(e) {
+                    e.preventDefault();
+
+                    const btn = document.getElementById('submit-answers-btn');
+                    btn.querySelector('.normal-state').classList.add('d-none');
+                    btn.querySelector('.loading-state').classList.remove('d-none');
+                    btn.disabled = true;
+
+                    const formData = new FormData(submitForm);
+                    const queryString = new URLSearchParams(formData).toString();
+
+                    fetch(submitForm.action + '?' + queryString, {
+                            method: 'GET',
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        })
+                        .then(response => response.text())
+                        .then(html => {
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+
+                            const renderedAnswers = doc.getElementById('rendered-answers-content');
+
+                            // Also grab the styles to ensure proper rendering
+                            const styles = doc.querySelectorAll('style');
+
+                            if (renderedAnswers) {
+                                const container = document.getElementById('ajax-answers-container');
+
+                                // Append CSS from partial layout
+                                styles.forEach(style => {
+                                    // Basic check to prevent duplicate CSS injects
+                                    if (!document.head.innerHTML.includes('question-section')) {
+                                        document.head.appendChild(style.cloneNode(true));
+                                    }
+                                });
+
+                                // Render answers with a nice header
+                                container.innerHTML = `
+                            <div class="row mb-4 animate__animated animate__fadeIn">
+                                <div class="col-12 text-center">
+                                    <h2 class="display-6 fw-bold">Answer Review</h2>
+                                    <p class="text-muted">Detailed explanation of your performance.</p>
+                                </div>
+                            </div>
+                            ${renderedAnswers.outerHTML}
+                        `;
+
+                                // Remove the answer form container / slide it up
+                                submitForm.parentElement.style.transition =
+                                    "all 0.5s ease";
+                                submitForm.parentElement.style.height = "0";
+                                submitForm.parentElement.style.overflow = "hidden";
+                                submitForm.parentElement.style.padding = "0";
+                                submitForm.parentElement.style.margin = "0";
+                                submitForm.parentElement.style.opacity = "0";
+
+                                setTimeout(() => {
+                                    submitForm.parentElement.remove();
+                                }, 500);
+
+                                // Scroll smoothly to answers
+                                container.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+
+                            } else {
+                                // Fallback mechanism
+                                submitForm.submit();
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching answers:', error);
+                            // Fallback normal form submission on generic error
+                            submitForm.submit();
+                        });
+                };
+
+                submitForm.addEventListener('submit', triggerFetch);
+
+                @if (isset($existingResult) && $existingResult)
+                    // Auto-trigger if already completed previously
+                    triggerFetch(new Event('submit'));
+                @endif
+            }
+        });
+    </script>
 @endsection
